@@ -13,7 +13,7 @@ class Recipe:
         self.description = data['description']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
-        self.user_id = data['users_id']
+        self.user_id = data['user_id']
         self.posted_by=None
         self.comments=[]
 
