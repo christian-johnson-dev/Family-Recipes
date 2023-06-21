@@ -12,5 +12,3 @@ class Comment:
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
 
-    @classmethod
-    def create(cls,data):
