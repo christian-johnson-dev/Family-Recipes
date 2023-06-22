@@ -85,9 +85,29 @@ class Recipe:
         return recipe
 
     @classmethod
-    def change(cls,data):
-        query="""UPDATE recipes SET title=%(title)s, ingredients=%(ingredients)s,img=%(img)s,
-                description=%(description)s,user_id=%(user_id)s
+    def change_title(cls,data):
+        query="""UPDATE recipes SET title=%(title)s
+                WHERE id=%(id)s;"""
+        result=connectToMySQL(cls.db).query_db(query,data)
+        return result
+
+    @classmethod
+    def change_ingredients(cls,data):
+        query="""UPDATE recipes SET ingredients=%(ingredients)s
+                WHERE id=%(id)s;"""
+        result=connectToMySQL(cls.db).query_db(query,data)
+        return result
+
+    @classmethod
+    def change_img(cls,data):
+        query="""UPDATE recipes SET img=%(img)s
+                WHERE id=%(id)s;"""
+        result=connectToMySQL(cls.db).query_db(query,data)
+        return result
+
+    @classmethod
+    def change_description(cls,data):
+        query="""UPDATE recipes SET description=%(description)s
                 WHERE id=%(id)s;"""
         result=connectToMySQL(cls.db).query_db(query,data)
         return result
