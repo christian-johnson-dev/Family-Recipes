@@ -6,7 +6,77 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0"
     />
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <header class="bg-green-400">
+      <nav class="bg-purple-500 container flex mx-auto justify-between">
+        <div class="bg-teal-600 flex">
+          <h1 class="bg-slate-400">Family Recipies</h1>
+          <h3 class="bg-yellow-600">A collection of food and memories</h3>
+        </div>
+
+        <button class="bg-pink-400">Login</button>
+      </nav>
+    </header>
+    <div class="container mx-auto">
+      <a href="#">&lt;&lt; Back to recipes</a>
+      <section class="top-section flex flex-col-reverse md:flex-row">
+        <div class="w-full md:w-1/2">
+          <div class="recipe-title-group">
+            <h2 class="text-3xl">Macaroni and Ementhaller</h2>
+            <p class="text-xl">Contributed by Missy Hays</p>
+            <p class="text-xl">Created on 12/22/2022</p>
+            <p class="text-xl">Last updated on 12/22/2022</p>
+          </div>
+          <div class="recipe-ingredients-group mt-8">
+            <div class="ingredient-header flex justify-between">
+              <h3 class="text-2xl underline">Ingredients</h3>
+              <button
+                class="mr-4 bg-black text-white px-2 py-0.5 text-sm rounded-full"
+              >
+                edit
+              </button>
+            </div>
+
+            <ul>
+              <li>1 lb macaroni</li>
+              <li>1 lb ementhaller</li>
+              <li>1/2 cup butter</li>
+              <li>1/2 cup flour</li>
+              <li>1/2 cup milk</li>
+              <li>1/2 cup cream</li>
+              <li>1/2 cup salt</li>
+              <li>1/2 cup pepper</li>
+            </ul>
+          </div>
+        </div>
+        <div class="w-full md:w-1/2 overflow-hidden aspect-square rounded-xl">
+          <img
+            class=""
+            src="https://images.unsplash.com/photo-1612892010343-983bfd063dc5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80"
+            alt="Macaroni and Ementhaller"
+          />
+        </div>
+      </section>
+      <section class="w-full">
+        <header class="section-header bg-slate-400 mt-8">
+          <h3 class="text-white text-xl text-center">Description</h3>
+        </header>
+        <div class="content-wrapper flex justify-center">
+          <div class="columns-2 mx-4 mt-4">
+            <p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio
+              fugiat blanditiis numquam error impedit quasi eius quod mollitia
+              ad vitae magni aliquid alias distinctio quidem inventore officia
+              suscipit quia similique, maiores illum itaque nisi? Molestiae cum
+              sit ipsam error praesentium, odit et quas quaerat eligendi
+              blanditiis nesciunt numquam explicabo ducimus!
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
 </html>

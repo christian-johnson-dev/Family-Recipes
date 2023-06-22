@@ -7,54 +7,150 @@
       content="width=device-width, initial-scale=1.0"
     />
     <title>Family Recipies</title>
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
-    <header>
-      <nav>
-        <h1>Family Recipies</h1>
-        <h3>A collection of food and memories</h3>
-        <button>Login</button>
+    <header class="bg-green-400">
+      <nav class="bg-purple-500 container flex mx-auto justify-between">
+        <div class="bg-teal-600 flex">
+          <h1 class="bg-slate-400">Family Recipies</h1>
+          <h3 class="bg-yellow-600">A collection of food and memories</h3>
+        </div>
+
+        <button class="bg-pink-400">Login</button>
       </nav>
     </header>
-    <div>
-      <div>
-        <input type="text" />
-        <button>Search</button>
+    <div class="container mx-auto">
+      <div class="flex justify-between my-5">
+        <div class="search-bar">
+          <label for="searchinput">Search</label>
+          <input
+            name="search-input"
+            type="text"
+            id="searchinput"
+            class="border-2 border-gray-400"
+          />
+          <button class="bg-red-500 text-white">Search</button>
+        </div>
+        <button class="bg-orange-500 text-white">Create</button>
       </div>
-      <button>Create</button>
+
+      <table class="w-full overflow-y-auto h-[400px]">
+        <thead>
+          <tr>
+            <th class="text-left">Recipe</th>
+            <th>Contributor</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody class="border-2 border-black">
+          <tr class="border-b-2 border-black">
+            <a href="#">
+              <td class="bg-fuchsia-500">Macaroni and Ementhaller</td>
+              <td class="bg-slate-400">Missy Hays</td>
+              <td>12/22/2022</td>
+            </a>
+          </tr>
+          <tr class="border-b-2 border-black">
+            <a href="#">
+              <td>Cob salad</td>
+              <td>Burt Sampson</td>
+              <td>12//14/2022</td>
+            </a>
+          </tr>
+          <tr class="border-b-2 border-black">
+            <a href="#">
+              <td>Chocolate Buttercream Frosting</td>
+              <td>Missy Hays</td>
+              <td>6/13/2023</td>
+            </a>
+          </tr>
+          <tr class="border-b-2 border-black">
+            <a href="#">
+              <td class="bg-fuchsia-500">Macaroni and Ementhaller</td>
+              <td class="bg-slate-400">Missy Hays</td>
+              <td>12/22/2022</td>
+            </a>
+          </tr>
+          <tr class="border-b-2 border-black">
+            <a href="#">
+              <td>Cob salad</td>
+              <td>Burt Sampson</td>
+              <td>12//14/2022</td>
+            </a>
+          </tr>
+          <tr class="border-b-2 border-black">
+            <a href="#">
+              <td>Chocolate Buttercream Frosting</td>
+              <td>Missy Hays</td>
+              <td>6/13/2023</td>
+            </a>
+          </tr>
+          <tr class="border-b-2 border-black">
+            <a href="#">
+              <td class="bg-fuchsia-500">Macaroni and Ementhaller</td>
+              <td class="bg-slate-400">Missy Hays</td>
+              <td>12/22/2022</td>
+            </a>
+          </tr>
+          <tr class="border-b-2 border-black">
+            <a href="#">
+              <td>Cob salad</td>
+              <td>Burt Sampson</td>
+              <td>12//14/2022</td>
+            </a>
+          </tr>
+          <tr class="border-b-2 border-black">
+            <a href="#">
+              <td>Chocolate Buttercream Frosting</td>
+              <td>Missy Hays</td>
+              <td>6/13/2023</td>
+            </a>
+          </tr>
+          <tr class="border-b-2 border-black">
+            <a href="#">
+              <td class="bg-fuchsia-500">Macaroni and Ementhaller</td>
+              <td class="bg-slate-400">Missy Hays</td>
+              <td>12/22/2022</td>
+            </a>
+          </tr>
+          <tr class="border-b-2 border-black">
+            <a href="#">
+              <td>Cob salad</td>
+              <td>Burt Sampson</td>
+              <td>12//14/2022</td>
+            </a>
+          </tr>
+          <tr class="border-b-2 border-black">
+            <a href="#">
+              <td>Chocolate Buttercream Frosting</td>
+              <td>Missy Hays</td>
+              <td>6/13/2023</td>
+            </a>
+          </tr>
+          <tr class="border-b-2 border-black">
+            <a href="#">
+              <td class="bg-fuchsia-500">Macaroni and Ementhaller</td>
+              <td class="bg-slate-400">Missy Hays</td>
+              <td>12/22/2022</td>
+            </a>
+          </tr>
+          <tr class="border-b-2 border-black">
+            <a href="#">
+              <td>Cob salad</td>
+              <td>Burt Sampson</td>
+              <td>12//14/2022</td>
+            </a>
+          </tr>
+          <tr class="border-b-2 border-black">
+            <a href="#">
+              <td>Chocolate Buttercream Frosting</td>
+              <td>Missy Hays</td>
+              <td>6/13/2023</td>
+            </a>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <table>
-      <thead>
-        <tr>
-          <th>Recipe</th>
-          <th>Contributor</th>
-          <th>Date</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!--  -->
-        <tr>
-          <a href="#">
-          <td>Macaroni and Ementhaller</td>
-          <td>Missy Hays</td>
-          <td>12/22/2022</td>
-          </a>
-        </tr>
-        <tr>
-          <a href="#"></a>
-          <td>Cob salad</td>
-          <td>Burt Sampson</td>
-          <td>12//14/2022</td>
-          </a>
-        </tr>
-        <tr>
-          <a href="#"></a>
-          <td>Chocolate Buttercream Frosting</td>
-          <td>Missy Hays</td>
-          <td>6/13/2023</td>
-          </a>
-        </tr>
-      </tbody>
-    </table>
   </body>
 </html>
