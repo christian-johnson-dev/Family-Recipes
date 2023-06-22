@@ -1,5 +1,7 @@
 ## Front end
     template
+    static
+    css
         
 ## Back end
     controllers
