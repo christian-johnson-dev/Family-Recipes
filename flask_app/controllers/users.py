@@ -4,6 +4,15 @@ from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 from flask_app.models import user
 
+@app.route('/list')
+def list_page():
+    return render_template('list.html')
+
+@app.route('/recipe')
+def recipet_page():
+    return render_template('recipe.html')
+
+
 @app.route("/")
 def index():
     return render_template("index.html")
