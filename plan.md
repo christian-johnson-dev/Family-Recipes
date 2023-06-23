@@ -1,3 +1,9 @@
+mysql -u root -p (logs into )
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'rootroot';
+FLUSH PRIVILEGES;
+quit
+
+
 ## Front end
     template
         list.html (list all recipes)

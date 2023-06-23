@@ -5,7 +5,7 @@ class MySQLConnection:
     def __init__(self, db):
         # change the user and password as needed
         connection = pymysql.connect(host = 'localhost',
-                                    user = 'root', 
+                                    user = 'rootroot', 
                                     # password = 'root', 
                                     password = 'password', 
                                     db = db,
