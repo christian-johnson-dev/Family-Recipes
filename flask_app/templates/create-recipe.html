@@ -6,32 +6,90 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0"
     />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+      @layer components {
+        .text-area-input {
+          @apply border-2  border-black shadow-lg w-full h-32 p-2 rounded-md;
+        }
+      }
+    </style>
     <title>Create Recipe</title>
   </head>
   <body>
-    <form action="post">
-      <div class="input-wrapper">
-        <label for="title-input">Title:</label>
-        <input
-          id="title-input"
-          type="text"
-        />
-      </div>
-      <div class="input-wrapper">
-        <label for="ingredients-input">Title:</label>
-        <input
-          id="ingredients-input"
-          type="text"
-        />
-      </div>
-      <div class="input-wrapper">
-        <label for="instructions-input">Title:</label>
-        <input
-          id="instructions-input"
-          type="text"
-        />
-      </div>
-      <button type="submit">Created</button>
-    </form>
+    <header class="bg-green-400">
+      <nav class="bg-purple-500 container flex mx-auto justify-between">
+        <div class="bg-teal-600 flex">
+          <h1 class="bg-slate-400">Family Recipies</h1>
+          <h3 class="bg-yellow-600">A collection of food and memories</h3>
+        </div>
+
+        <div class="login-status">
+          <!-- Todo This should either say "You are not logged in" or "Logged in as <<username>>" -->
+          <p>You are not logged in</p>
+          <!-- Todo This should either say "Log in" or "Log out" -->
+          <!-- Onclick if currently logged out then display log in modal, else log out -->
+          <button
+            id="modal-login-btn"
+            class="bg-black text-white px-2 py-0.5 text-sm rounded-full"
+          >
+            Login
+          </button>
+        </div>
+      </nav>
+    </header>
+    <div class="container mx-auto px-8">
+      <form action="post">
+        <!--* TITLE -->
+        <div class="input-wrapper">
+          <label for="title-input">Title:</label>
+          <input
+            id="title-input"
+            type="text"
+            class="border-2 border-black shadow-lg w-full h-10 p-2 rounded-md"
+          />
+        </div>
+        <!--* INGREDIENTS -->
+        <div class="input-wrapper">
+          <label for="ingredients-input">Ingredients:</label>
+          <textarea
+            id="ingredients-input"
+            class="text-area-input"
+          ></textarea>
+        </div>
+        <!--* INSTRUCTIONS -->
+        <div class="input-wrapper">
+          <label for="instructions-input">Instructions:</label>
+          <textarea
+            id="instructions-input"
+            class="text-area-input"
+          ></textarea>
+        </div>
+        <!--* TITLE -->
+        <div class="input-wrapper">
+          <label for="instructions-input">Description:</label>
+          <textarea
+            id="description-input"
+            class="text-area-input"
+          ></textarea>
+        </div>
+        <!--* IMAGE -->
+        <div class="border">
+          <label for="image-loader">Image:</label>
+          <input
+            type="file"
+            name=""
+            id="image-loader"
+          />
+        </div>
+
+        <button
+          type="submit"
+          class="bg-black text-white rounded-lg"
+        >
+          Create
+        </button>
+      </form>
+    </div>
   </body>
 </html>
