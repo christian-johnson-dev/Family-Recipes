@@ -71,6 +71,7 @@ class Recipe:
         WHERE recipes.id= %(id)s;"""
         result=connectToMySQL(cls.db).query_db(query,{'id':id})
         recipe = result[0]
+        print(recipe)
         user_info = {
                 'id' : recipe['users.id'],
                 'first_name':recipe['first_name'],
@@ -80,8 +81,8 @@ class Recipe:
                 'created_at':recipe['users.created_at'],
                 'updated_at':recipe['users.updated_at']
                 }
-        recipe.posted_by=User(user_info)
-        recipe.comments=Comment.get_comments_by_recipe_id(id)
+        # recipe.posted_by=User(user_info)
+        # recipe.comments=Comment.get_recipes_comments(id)
         return recipe
 
     @classmethod
