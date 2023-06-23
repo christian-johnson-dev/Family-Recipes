@@ -33,9 +33,9 @@ WORKS       save
 WORKS       get_all_recipes
 WORKS       validate_recipe
 WORKS       get_one_recipe
-            change
-            delete
+WORKS       delete
 
+            change
             change_ingredients
             change_title
             change_description
