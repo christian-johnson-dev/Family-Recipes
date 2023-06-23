@@ -1,7 +1,12 @@
 ## Front end
     template
-        create-recipe.html
         list.html (list all recipes)
+            {% for recipe in recipes%}
+            {{recipe.name}}
+            {% endfor %}
+        create-recipe.html
+            add to form /save_recipe
+
         recipe.html (display one recipe)
 
     static
