@@ -81,7 +81,8 @@ class Recipe:
                 'created_at':recipe['users.created_at'],
                 'updated_at':recipe['users.updated_at']
                 }
-        # recipe.posted_by=User(user_info)
+        recipe = cls(recipe)        
+        recipe.posted_by=User(user_info)
         # recipe.comments=Comment.get_recipes_comments(id)
         return recipe
 
