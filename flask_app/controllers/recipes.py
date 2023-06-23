@@ -5,20 +5,19 @@ from flask_app.models.recipe import Recipe
 
 @app.route("/list")
 def recipes():
-    if 'user_id' not in session:
+    if session.get('logged_in') != True:
         return redirect("/logout")
     return render_template("list.html",recipes = Recipe.get_all_recipes())
 
 @app.route("/create_recipe")
 def show_recipe_form():
-    if 'user_id' not in session:
+    if session['logged_in'] != True:
         return redirect("/logout")
     return render_template("create-recipe.html")
 
 @app.route("/save_recipe", methods=['post'])
 def create_recipe():
-    print(request.form)
-    if 'user_id' not in session:
+    if session.get('logged_in') == True:
         return redirect("/logout")
     if not Recipe.validate_recipe(request.form):
         return redirect("/create_recipe")
@@ -27,8 +26,8 @@ def create_recipe():
 
 @app.route('/one_recipe/<int:id>')
 def show_recipe(id):
-    # if session.get('logged_in') == True:
-    #     return redirect("/logout")
+    if session.get('logged_in') == True:
+        return redirect("/logout")
     session['recipe_id']=id
     recipe = Recipe.get_one_recipe(id)
     
