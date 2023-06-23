@@ -50,6 +50,7 @@
                 <td class="bg-fuchsia-500"><a href="/one_recipe/{{recipe.id}}">{{recipe.title}}</a></td>
                 <td class="bg-slate-400">{{recipe.posted_by.first_name}} {{recipe.posted_by.last_name}}</td>
                 <td>{{recipe.created_at}}</td>
+                <td><a href="/delete_recipe/{{recipe.id}}">Delete</a></td>
             </tr>
           {% endfor %}
         </tbody>
