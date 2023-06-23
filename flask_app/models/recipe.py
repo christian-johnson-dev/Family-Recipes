@@ -82,7 +82,7 @@ class Recipe:
                 'updated_at':recipe['users.updated_at']
                 }
         # recipe.posted_by=User(user_info)
-        # recipe.comments=Comment.get_recipes_comments(id)
+        recipe.comments=Comment.get_recipes_comments(id)
         return recipe
 
     @classmethod
