@@ -61,8 +61,35 @@
         </div>
       </section>
       <section class="w-full">
-        <header class="section-header bg-slate-400 mt-8">
+        <header class="section-header bg-slate-400 mt-8 relative">
           <h3 class="text-white text-xl text-center">Description</h3>
+          <button
+            class="absolute right-2 mr-4 bg-black text-white px-2 py-0.5 text-sm rounded-full top-1/2 transform -translate-y-1/2"
+          >
+            edit
+          </button>
+        </header>
+        <div class="content-wrapper flex justify-center">
+          <div class="columns-2 mx-4 mt-4">
+            <p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio
+              fugiat blanditiis numquam error impedit quasi eius quod mollitia
+              ad vitae magni aliquid alias distinctio quidem inventore officia
+              suscipit quia similique, maiores illum itaque nisi? Molestiae cum
+              sit ipsam error praesentium, odit et quas quaerat eligendi
+              blanditiis nesciunt numquam explicabo ducimus!
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="w-full">
+        <header class="section-header bg-slate-400 mt-8 relative">
+          <h3 class="text-white text-xl text-center">Directions</h3>
+          <button
+            class="absolute right-2 mr-4 bg-black text-white px-2 py-0.5 text-sm rounded-full top-1/2 transform -translate-y-1/2"
+          >
+            edit
+          </button>
         </header>
         <div class="content-wrapper flex justify-center">
           <div class="columns-2 mx-4 mt-4">
@@ -78,5 +105,20 @@
         </div>
       </section>
     </div>
+    <script>
+      //Get the modal
+      const nameModal = document.getElementById("name-modal");
+      const nameModalBtn = document.getElementById("name-modal-btn");
+    </script>
   </body>
+  <!-- Modals -->
+  <div
+    id="name-modal"
+    class="fixed z-10 left-0 top-0 w-full h-full overflow-auto bg-black bg-opacity-50 flex justify-center items-center hidden"
+  >
+    <div class="border bg-gray-50 border-gray-500 w-5/6 px-5 py-5 mt-[7%]">
+      <span class="close">&times;</span>
+      <p>Edit Name:</p>
+    </div>
+  </div>
 </html>
