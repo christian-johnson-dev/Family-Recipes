@@ -1,21 +1,56 @@
 console.log("modal.js loaded");
-const modal = document.getElementById("modal-name");
-const modalBtn = document.getElementById("modal-name-btn");
-const closeBtn = document.getElementById("modal-name-close");
 
-// open/display the modal
-modalBtn.onclick = function () {
+// Define all modals and buttons
+const modals = {
+  name: {
+    modal: document.getElementById("modal-name"),
+    btn: document.getElementById("modal-name-btn"),
+    closeBtn: document.getElementById("modal-name-close"),
+  },
+  ingredients: {
+    modal: document.getElementById("modal-ingredients"),
+    btn: document.getElementById("modal-ingredient-btn"),
+    closeBtn: document.getElementById("modal-ingredients-close"),
+  },
+  directions: {
+    modal: document.getElementById("modal-directions"),
+    btn: document.getElementById("modal-instructions-btn"),
+    closeBtn: document.getElementById("modal-directions-close"),
+  },
+  description: {
+    modal: document.getElementById("modal-description"),
+    btn: document.getElementById("modal-description-btn"),
+    closeBtn: document.getElementById("modal-description-close"),
+  },
+};
+
+// Define function to open modal
+function openModal(modal) {
   modal.style.display = "block";
-};
+}
 
-// close the modal
-closeBtn.onclick = function () {
+// Define function to close modal
+function closeModal(modal) {
   modal.style.display = "none";
-};
+}
 
-// close the modal if user clicks outside of it
-window.onclick = function (event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
+// Apply functions to each modal and its buttons
+for (const key in modals) {
+  if (modals.hasOwnProperty(key)) {
+    const element = modals[key];
+
+    element.btn.onclick = function () {
+      openModal(element.modal);
+    };
+
+    element.closeBtn.onclick = function () {
+      closeModal(element.modal);
+    };
+
+    window.onclick = function (event) {
+      if (event.target == element.modal) {
+        closeModal(element.modal);
+      }
+    };
   }
-};
+}

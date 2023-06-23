@@ -41,6 +41,7 @@
     <title>Document</title>
   </head>
   <body>
+    <!-- * HEADER BAR -->
     <header class="bg-green-400">
       <nav class="bg-purple-500 container flex mx-auto justify-between">
         <div class="bg-teal-600 flex">
@@ -52,20 +53,29 @@
       </nav>
     </header>
     <div class="container mx-auto">
-      <a href="#">&lt;&lt; Back to recipes</a>
+      <a href="#">&lt;&lt; Back to recipes list</a>
+      <!-- * NAME, INGREDIENTS & IMAGE Section -->
       <section class="top-section flex flex-col-reverse md:flex-row">
         <div class="w-full md:w-1/2">
+          <!-- * Name -->
           <div class="recipe-title-group">
             <h2 class="text-3xl">Macaroni and Ementhaller</h2>
+            <button
+              id="modal-name-btn"
+              class="mr-4 bg-black text-white px-2 py-0.5 text-sm rounded-full"
+            >
+              edit
+            </button>
             <p class="text-xl">Contributed by Missy Hays</p>
             <p class="text-xl">Created on 12/22/2022</p>
             <p class="text-xl">Last updated on 12/22/2022</p>
           </div>
+          <!-- * Ingredients -->
           <div class="recipe-ingredients-group mt-8">
             <div class="ingredient-header flex justify-between">
               <h3 class="text-2xl underline">Ingredients</h3>
               <button
-                id="modal-name-btn"
+                id="modal-ingredient-btn"
                 class="mr-4 bg-black text-white px-2 py-0.5 text-sm rounded-full"
               >
                 edit
@@ -84,6 +94,7 @@
             </ul>
           </div>
         </div>
+        <!-- * Image -->
         <div class="w-full md:w-1/2 overflow-hidden aspect-square rounded-xl">
           <img
             class="hero-image"
@@ -92,9 +103,40 @@
           />
         </div>
       </section>
+      <!-- * DESCRIPTION Section -->
       <section class="w-full">
         <header class="section-header bg-slate-400 mt-8">
           <h3 class="text-white text-xl text-center">Description</h3>
+          <button
+            id="modal-description-btn"
+            class="mr-4 bg-black text-white px-2 py-0.5 text-sm rounded-full"
+          >
+            edit
+          </button>
+        </header>
+        <div class="content-wrapper flex justify-center">
+          <div class="columns-2 mx-4 mt-4">
+            <p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio
+              fugiat blanditiis numquam error impedit quasi eius quod mollitia
+              ad vitae magni aliquid alias distinctio quidem inventore officia
+              suscipit quia similique, maiores illum itaque nisi? Molestiae cum
+              sit ipsam error praesentium, odit et quas quaerat eligendi
+              blanditiis nesciunt numquam explicabo ducimus!
+            </p>
+          </div>
+        </div>
+      </section>
+      <!-- * INSTRUCTIONS Section -->
+      <section class="w-full">
+        <header class="section-header bg-slate-400 mt-8">
+          <h3 class="text-white text-xl text-center">Instructions</h3>
+          <button
+            id="modal-instructions-btn"
+            class="mr-4 bg-black text-white px-2 py-0.5 text-sm rounded-full"
+          >
+            edit instructions
+          </button>
         </header>
         <div class="content-wrapper flex justify-center">
           <div class="columns-2 mx-4 mt-4">
@@ -110,21 +152,111 @@
         </div>
       </section>
     </div>
+    <!-- *  This is the modal for submitting updates for NAME -->
     <div
       id="modal-name"
       class="modal"
     >
       <div class="modal-content">
-        <span
-          id="modal-name-close"
-          class="close"
-          >&times;</span
-        >
-        <p>Edit Name:</p>
-        <input type="text" />
-        <button type="submit"></button>
+        <form action="">
+          <span
+            id="modal-name-close"
+            class="close"
+            >&times;</span
+          >
+          <p>Edit Name:</p>
+          <input
+            type="text"
+            class="border-2"
+          />
+          <button
+            type="submit"
+            class="bg-black text-white"
+          >
+            Update Name
+          </button>
+        </form>
       </div>
     </div>
+    <!-- *  This is the modal for submitting updates for INGREDIENTS -->
+    <div
+      id="modal-ingredients"
+      class="modal"
+    >
+      <div class="modal-content">
+        <form action="">
+          <span
+            id="modal-ingredients-close"
+            class="close"
+            >&times;</span
+          >
+          <p>Edit Ingredients:</p>
+          <input
+            type="text"
+            class="border-2"
+          />
+          <button
+            type="submit"
+            class="bg-black text-white"
+          >
+            Update Ingredients
+          </button>
+        </form>
+      </div>
+    </div>
+    <!-- *  This is the modal for submitting updates for DIRECTIONS -->
+    <div
+      id="modal-directions"
+      class="modal"
+    >
+      <div class="modal-content">
+        <form action="">
+          <span
+            id="modal-directions-close"
+            class="close"
+            >&times;</span
+          >
+          <p>Edit Directions:</p>
+          <input
+            type="text"
+            class="border-2"
+          />
+          <button
+            type="submit"
+            class="bg-black text-white"
+          >
+            Update Directions
+          </button>
+        </form>
+      </div>
+    </div>
+    <!-- *  This is the modal for submitting updates for DESCRIPTION -->
+    <div
+      id="modal-description"
+      class="modal"
+    >
+      <div class="modal-content">
+        <form action="">
+          <span
+            id="modal-description-close"
+            class="close"
+            >&times;</span
+          >
+          <p>Edit Description:</p>
+          <input
+            type="text"
+            class="border-2"
+          />
+          <button
+            type="submit"
+            class="bg-black text-white"
+          >
+            Update Description
+          </button>
+        </form>
+      </div>
+    </div>
+    <!-- * This is the external js file that handles the opening and closing of the modals. -->
     <script src="../static/js/modal.js"></script>
   </body>
 </html>
