@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  /* Modals */
+  .modal-content {
+    @apply bg-orange-500;
+  }
+  .hero-image {
+    @apply h-64 w-64;
+  }
+}
