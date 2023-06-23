@@ -40,22 +40,23 @@ class Comment:
     def get_recipes_comments(cls, id):
         
         query = """SELECT * FROM comments
-                    LEFT JOIN recipe ON comments.recipe_id=recipes.id;"""
+                    LEFT JOIN recipes ON comments.recipe_id=recipes.id;"""
         
         results = connectToMySQL(cls.db).query_db(query)
         comments = []
-        
+        print("This is the result")
+        print(results)
         for result in results:
             comment = cls(result)
             comments.append( comment )
-            user_info = {
-                'id' : result['id'],
-                'text':result['text'],
-                'user_id':result['user_id'],
-                'recipe_id':result['recipe_id'],
-                'created_at':result['users.created_at'],
-                'updated_at':result['users.updated_at']
-                }
+            # user_info = {
+            #     'id' : result['id'],
+            #     'text':result['text'],
+            #     'user_id':result['user_id'],
+            #     'recipe_id':result['recipe_id'],
+            #     'created_at':result['users.created_at'],
+            #     'updated_at':result['users.updated_at']
+            #     }
             # comment.posted_by=User(user_info)
             
         return comments
