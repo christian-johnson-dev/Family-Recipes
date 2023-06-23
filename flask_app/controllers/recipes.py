@@ -45,7 +45,7 @@ def show_recipe(id):
 def edit_title():
     if session.get('logged_in') == False:
         return redirect("/logout")
-    if not Recipe.validate_recipe(request.form):
+    if not Recipe.validate_title(request.form):
         print(request.form)
 
         return redirect(f"/one_recipe/{request.form['id']}")
@@ -56,7 +56,7 @@ def edit_title():
 def edit_ingredients():
     if session.get('logged_in') == False:
         return redirect("/logout")
-    if not Recipe.validate_recipe(request.form):
+    if not Recipe.validate_ingredients(request.form):
         print(request.form)
 
         return redirect(f"/one_recipe/{request.form['id']}")
@@ -67,10 +67,7 @@ def edit_ingredients():
 def edit_img():
     if session.get('logged_in') == False:
         return redirect("/logout")
-    if not Recipe.validate_recipe(request.form):
-        print(request.form)
-
-        return redirect(f"/one_recipe/{request.form['id']}")
+    
     Recipe.change_img(request.form)
     return redirect(f"/one_recipe/{request.form['id']}")
 
@@ -78,7 +75,7 @@ def edit_img():
 def edit_description():
     if session.get('logged_in') == False:
         return redirect("/logout")
-    if not Recipe.validate_recipe(request.form):
+    if not Recipe.validate_description(request.form):
         print(request.form)
 
         return redirect(f"/one_recipe/{request.form['id']}")
@@ -89,7 +86,7 @@ def edit_description():
 def edit_directions():
     if session.get('logged_in') == False:
         return redirect("/logout")
-    if not Recipe.validate_recipe(request.form):
+    if not Recipe.validate_directions(request.form):
         print(request.form)
 
         return redirect(f"/one_recipe/{request.form['id']}")

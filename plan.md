@@ -35,11 +35,11 @@ WORKS       validate_recipe
 WORKS       get_one_recipe
 WORKS       delete
 
-            change
-            change_ingredients
-            change_title
-            change_description
-            change_image
+
+WORKS        change_ingredients
+WORKS        change_title
+WORKS        change_description
+             change_image
         user
 
         comment

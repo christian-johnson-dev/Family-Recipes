@@ -54,13 +54,58 @@ class Recipe:
     
         is_valid = True
         if len(recipe['title'])<3:
-            flash("Title must be at least 3 characters!")
+            flash("Title must be at least 3 characters!","title")
             is_valid = False
         if len(recipe['ingredients'])<3:
-            flash("Ingredients  must be at least 3 characters!")
+            flash("Ingredients  must be at least 3 characters!","ingredients")
             is_valid = False
         if len(recipe['description'])<3:
-            flash("Description  must be at least 3 characters!")
+            flash("Description  must be at least 3 characters!","description")
+            is_valid = False
+        
+        return is_valid
+
+    
+
+    @staticmethod
+    def validate_title(recipe):
+    
+        is_valid = True
+        if len(recipe['title'])<3:
+            flash("Title must be at least 3 characters!","title")
+            is_valid = False
+        
+        return is_valid
+
+    @staticmethod
+    def validate_ingredients(recipe):
+    
+        is_valid = True
+        
+        if len(recipe['ingredients'])<3:
+            flash("Ingredients  must be at least 3 characters!","ingredients")
+            is_valid = False
+        
+        return is_valid
+
+    @staticmethod
+    def validate_description(recipe):
+    
+        is_valid = True
+        
+        if len(recipe['description'])<3:
+            flash("Description  must be at least 3 characters!","description")
+            is_valid = False
+        
+        return is_valid
+
+    @staticmethod
+    def validate_directions(recipe):
+    
+        is_valid = True
+        
+        if len(recipe['directions'])<3:
+            flash("Directions must be at least 3 characters!","directions")
             is_valid = False
         
         return is_valid
