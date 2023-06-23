@@ -25,10 +25,10 @@
       <section class="top-section flex flex-col-reverse md:flex-row">
         <div class="w-full md:w-1/2">
           <div class="recipe-title-group">
-            <h2 class="text-3xl">Macaroni and Ementhaller</h2>
-            <p class="text-xl">Contributed by Missy Hays</p>
-            <p class="text-xl">Created on 12/22/2022</p>
-            <p class="text-xl">Last updated on 12/22/2022</p>
+            <h2 class="text-3xl">{{recipe.title}}</h2>
+            <p class="text-xl">Contributed by {{recipe.posted_by.first_name}} {{recipe.posted_by.last_name}}</p>
+            <p class="text-xl">Created on {{recipe.created_at}}</p>
+            <p class="text-xl">Last updated on {{recipe.updated_at}}</p>
           </div>
           <div class="recipe-ingredients-group mt-8">
             <div class="ingredient-header flex justify-between">
@@ -39,17 +39,7 @@
                 edit
               </button>
             </div>
-
-            <ul>
-              <li>1 lb macaroni</li>
-              <li>1 lb ementhaller</li>
-              <li>1/2 cup butter</li>
-              <li>1/2 cup flour</li>
-              <li>1/2 cup milk</li>
-              <li>1/2 cup cream</li>
-              <li>1/2 cup salt</li>
-              <li>1/2 cup pepper</li>
-            </ul>
+            {{recipe.ingredients}}
           </div>
         </div>
         <div class="w-full md:w-1/2 overflow-hidden aspect-square rounded-xl">
@@ -72,12 +62,7 @@
         <div class="content-wrapper flex justify-center">
           <div class="columns-2 mx-4 mt-4">
             <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio
-              fugiat blanditiis numquam error impedit quasi eius quod mollitia
-              ad vitae magni aliquid alias distinctio quidem inventore officia
-              suscipit quia similique, maiores illum itaque nisi? Molestiae cum
-              sit ipsam error praesentium, odit et quas quaerat eligendi
-              blanditiis nesciunt numquam explicabo ducimus!
+              {{recipe.description}}
             </p>
           </div>
         </div>
@@ -94,12 +79,7 @@
         <div class="content-wrapper flex justify-center">
           <div class="columns-2 mx-4 mt-4">
             <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio
-              fugiat blanditiis numquam error impedit quasi eius quod mollitia
-              ad vitae magni aliquid alias distinctio quidem inventore officia
-              suscipit quia similique, maiores illum itaque nisi? Molestiae cum
-              sit ipsam error praesentium, odit et quas quaerat eligendi
-              blanditiis nesciunt numquam explicabo ducimus!
+
             </p>
           </div>
         </div>

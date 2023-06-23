@@ -11,13 +11,13 @@ def recipes():
 
 @app.route("/create_recipe")
 def show_recipe_form():
-    if session['logged_in'] != True:
+    if session['logged_in'] == False:
         return redirect("/logout")
     return render_template("create-recipe.html")
 
-@app.route("/save_recipe", methods=['post'])
+@app.route("/save_recipe", methods=['POST'])
 def create_recipe():
-    if session.get('logged_in') == True:
+    if session.get('logged_in') == False:
         return redirect("/logout")
     if not Recipe.validate_recipe(request.form):
         return redirect("/create_recipe")
@@ -26,7 +26,7 @@ def create_recipe():
 
 @app.route('/one_recipe/<int:id>')
 def show_recipe(id):
-    if session.get('logged_in') == True:
+    if session.get('logged_in') == False:
         return redirect("/logout")
     session['recipe_id']=id
     recipe = Recipe.get_one_recipe(id)
@@ -83,6 +83,17 @@ def edit_description():
 
         return redirect(f"/one_recipe/{request.form['id']}")
     Recipe.change_description(request.form)
+    return redirect(f"/one_recipe/{request.form['id']}")
+
+@app.route('/edit_directions', methods=['post'])
+def edit_directions():
+    if session.get('logged_in') == True:
+        return redirect("/logout")
+    if not Recipe.validate_recipe(request.form):
+        print(request.form)
+
+        return redirect(f"/one_recipe/{request.form['id']}")
+    Recipe.change_directions(request.form)
     return redirect(f"/one_recipe/{request.form['id']}")
 
 @app.route('/recipes/delete/<int:id>')

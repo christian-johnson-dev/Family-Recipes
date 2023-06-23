@@ -9,7 +9,14 @@
     <title>Create Recipe</title>
   </head>
   <body>
-    <form action="post">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      {% for message in messages %}
+      <p>{{message}}</p>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <form action="/save_recipe" method="POST">
       <div class="input-wrapper">
         <label for="title-input">Title:</label>
         <input
@@ -40,6 +47,14 @@
           id="instructions-input"
           type="text"
           name="description"
+        />
+      </div>
+      <div class="input-wrapper">
+        <label for="instructions-input">Directions:</label>
+        <input
+          id="instructions-input"
+          type="text"
+          name="directions"
         />
       </div>
       <div class="input-wrapper">

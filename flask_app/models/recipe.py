@@ -11,6 +11,7 @@ class Recipe:
         self.ingredients = data['ingredients']
         self.img = data['img']
         self.description = data['description']
+        self.directions = data['directions']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
         self.user_id = data['user_id']
@@ -19,8 +20,8 @@ class Recipe:
 
     @classmethod
     def save (cls, data):
-        query = """INSERT INTO recipes (title,ingredients,img,description,user_id)
-                VALUES (%(title)s,%(ingredients)s,%(img)s,%(description)s,%(user_id)s);"""
+        query = """INSERT INTO recipes (title,ingredients,img,description,directions,user_id)
+                VALUES (%(title)s,%(ingredients)s,%(img)s,%(description)s,%(directions)s,%(user_id)s);"""
         result=connectToMySQL(cls.db).query_db(query,data)
         return result
 
@@ -110,6 +111,13 @@ class Recipe:
     @classmethod
     def change_description(cls,data):
         query="""UPDATE recipes SET description=%(description)s
+                WHERE id=%(id)s;"""
+        result=connectToMySQL(cls.db).query_db(query,data)
+        return result
+    
+    @classmethod
+    def change_directions(cls,data):
+        query="""UPDATE recipes SET directions=%(directions)s
                 WHERE id=%(id)s;"""
         result=connectToMySQL(cls.db).query_db(query,data)
         return result

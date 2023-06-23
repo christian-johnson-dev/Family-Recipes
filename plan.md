@@ -8,7 +8,7 @@ quit
     template
         list.html (list all recipes)
             {% for recipe in recipes%}
-            {{recipe.name}}
+            {{recipe.title}}
             {% endfor %}
         create-recipe.html
             add to form /save_recipe
@@ -28,16 +28,11 @@ quit
         recipes
         users
     models
-        comment
-            create (save)
-            delete
-            edit (change)
-            get_all
         recipe
-            save
-            get_all_recipes
-            validate_recipe
-            get_one_recipe
+WORKS       save
+WORKS       get_all_recipes
+WORKS       validate_recipe
+WORKS       get_one_recipe
             change
             delete
 
@@ -47,6 +42,11 @@ quit
             change_image
         user
 
+        comment
+            create (save)
+            delete
+            edit (change)
+            get_all
 ## Branches of development - frontend, backendcomments, backendrecipes
 ## Search by partial in MySQL
 ## Add image
@@ -54,3 +54,4 @@ quit
 ## Ingredients table
 ## Steps table
 ## user route/ needs to list of recipes not index.html
+## edge case of no recipes Indexerror one_recipe/1
