@@ -4,10 +4,6 @@ from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 from flask_app.models import user
 
-@app.route('/list')
-def list_page():
-    return render_template('list.html')
-
 @app.route('/recipe')
 def recipet_page():
     return render_template('recipe.html')
@@ -28,7 +24,8 @@ def register():
             "email": request.form["email"],
             "password": bcrypt.generate_password_hash(request.form["password"])
         }
-        user.User.create(data)
+        id=user.User.create(data)
+        session['user_id']=id
         session["first_name"] = data["first_name"]
         session["last_name"] = data["last_name"]
         session["email"] = data["email"]
@@ -50,9 +47,12 @@ def login():
     if not bcrypt.check_password_hash(user_from_db.password, request.form["password"]):
         flash("Invalid login", 'login')
         return redirect(url_for("index"))
+
+    
+    session['user_id']=user_from_db.id
     session['email']=request.form['email']
     session['logged_in'] = True
-    return render_template("wall.html")
+    return redirect("/success")
     
 @app.route("/success")
 def success_display():
@@ -60,7 +60,7 @@ def success_display():
         return render_template("wall.html")
     return "You are not logged in"
 
-@app.route("/logout", methods=["POST"])
+@app.route("/logout")
 def logout():
     session.clear()
     return redirect(url_for("index"))
