@@ -22,6 +22,11 @@ const modals = {
     btn: document.getElementById("modal-description-btn"),
     closeBtn: document.getElementById("modal-description-close"),
   },
+  login: {
+    modal: document.getElementById("modal-login"),
+    btn: document.getElementById("modal-login-btn"),
+    closeBtn: document.getElementById("modal-login-close"),
+  },
 };
 
 // Define function to open modal
