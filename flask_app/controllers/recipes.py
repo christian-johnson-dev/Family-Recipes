@@ -1,4 +1,5 @@
-from flask_app import app, render_template, session, redirect,request
+from flask_app import app
+from flask import render_template, session, redirect,request
 from flask_app.models.recipe import Recipe
 
 
@@ -75,7 +76,7 @@ def edit_img():
     return redirect(f"/one_recipe/{request.form['id']}")
 
 @app.route('/edit_description', methods=['post'])
-def edit_title():
+def edit_description():
     if session.get('logged_in') == True:
         return redirect("/logout")
     if not Recipe.validate_recipe(request.form):
