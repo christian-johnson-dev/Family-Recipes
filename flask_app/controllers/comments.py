@@ -17,12 +17,12 @@ def create_comment(recipe_id):
     comment.Comment.save(data)
     return redirect()
 
-@app.route("delete_comment/<id>")
-def delete_comment(id):
+@app.route("/delete_comment/<recipe_id>/<id>")
+def delete_comment(id,recipe_id):
     comment.Comment.delete(id)
-    return redirect()
+    return redirect(f"/one_recipe/{recipe_id}")
 
-@app.route("edit_comment/<id>", methods=["POST"])
+@app.route("/edit_comment/<id>", methods=["POST"])
 def edit_comment(id):
     comment.Comment.edit()
     return redirect("")
