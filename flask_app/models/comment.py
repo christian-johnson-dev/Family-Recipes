@@ -1,5 +1,6 @@
 from flask import flash
 from flask_app.config.mysqlconnection import connectToMySQL
+from flask_app.models.user import User
 
 class Comment:
     db = "family_recipes"
@@ -10,6 +11,7 @@ class Comment:
         self.recipe_id = data['recipe_id']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
+        self.posted_by = None
 
     # Create a comment given data from request form
     @classmethod
@@ -38,27 +40,26 @@ class Comment:
     # Given a recipe id this will return all comments
     @classmethod
     def get_recipes_comments(cls, id):
-        
         query = """SELECT * FROM comments
-                    LEFT JOIN recipes ON comments.recipe_id=recipes.id;"""
+                    LEFT JOIN recipes ON comments.recipe_id=recipes.id
+                    LEFT JOIN users ON recipes.user_id=users.id 
+                    WHERE recipes.id = %(id)s;"""
         
-        results = connectToMySQL(cls.db).query_db(query)
+        results = connectToMySQL(cls.db).query_db(query,{"id":id})
         comments = []
-        print("This is the result")
-        print(results)
         for result in results:
             comment = cls(result)
             comments.append( comment )
-            # user_info = {
-            #     'id' : result['id'],
-            #     'text':result['text'],
-            #     'user_id':result['user_id'],
-            #     'recipe_id':result['recipe_id'],
-            #     'created_at':result['users.created_at'],
-            #     'updated_at':result['users.updated_at']
-            #     }
-            # comment.posted_by=User(user_info)
-            
+            user_info = {
+                'id' : result['users.id'],
+                'first_name':result['first_name'],
+                'last_name':result['last_name'],
+                'email':result['email'],
+                'password':result['password'],
+                'created_at':result['users.created_at'],
+                'updated_at':result['users.updated_at']
+                }
+            comment.posted_by=User(user_info)
         return comments
 
     # Do you need to get one comment?

@@ -46,7 +46,6 @@ class Recipe:
                 'updated_at':result['users.updated_at']
                 }
             recipe.posted_by=User(user_info)
-            
         return recipes
 
     @staticmethod
@@ -117,7 +116,6 @@ class Recipe:
         WHERE recipes.id= %(id)s;"""
         result=connectToMySQL(cls.db).query_db(query,{'id':id})
         recipe = result[0]
-        print(recipe)
         user_info = {
                 'id' : recipe['users.id'],
                 'first_name':recipe['first_name'],
@@ -129,8 +127,34 @@ class Recipe:
                 }
         recipe = cls(recipe)        
         recipe.posted_by=User(user_info)
-        # recipe.comments=Comment.get_recipes_comments(id)
+        recipe.comments = Comment.get_recipes_comments(id)
         return recipe
+
+    @classmethod
+    def get_recipes_comments(cls, id):
+        
+        query = """SELECT * FROM comments
+                    LEFT JOIN recipes ON comments.recipe_id=recipes.id
+                    WHERE recipes.id = %(id)s;"""
+        
+        results = connectToMySQL(cls.db).query_db(query,{"id":id})
+        comments = []
+        print("This is the result")
+        print(results)
+        for result in results:
+            comment = Comment(result)
+            comments.append( comment )
+            # user_info = {
+            #     'id' : result['id'],
+            #     'text':result['text'],
+            #     'user_id':result['user_id'],
+            #     'recipe_id':result['recipe_id'],
+            #     'created_at':result['users.created_at'],
+            #     'updated_at':result['users.updated_at']
+            #     }
+            # comment.posted_by=User(user_info)
+            # comments = comments
+        return comments
 
     @classmethod
     def change_title(cls,data):
@@ -171,6 +195,5 @@ class Recipe:
     def delete(cls, id):
         query = "DELETE FROM recipes  WHERE recipes.id= %(id)s;"
         result=connectToMySQL(cls.db).query_db(query,{'id':id})
-        return result 
-
+        return result
 

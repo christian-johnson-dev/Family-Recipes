@@ -3,6 +3,7 @@ from flask import render_template, session, redirect,request
 from flask_app.models.recipe import Recipe
 
 
+
 @app.route("/list")
 def recipes():
     if session.get('logged_in') != True:

@@ -150,13 +150,14 @@
       <section>
         <!-- Previous Comments -->
         <div class="comments">
+          {% for comment in recipe.comments%}
           <div
             class="comment border border-black shadow-xl px-4 py-4 rounded-xl"
           >
             <div class="comment-header flex justify-between">
               <div class="comment-author">
-                <h4 class="text-xl">Missy Hays</h4>
-                <p class="text-sm">12/22/2022</p>
+                <h4 class="text-xl">{{comment.posted_by.first_name}}</h4>
+                <p class="text-sm">{{comment.created_at.strftime("%m/%d/%Y, %H:%M:%S")}}</p>
               </div>
               <div class="controls">
                 <button>edit</button>
@@ -164,13 +165,10 @@
               </div>
             </div>
             <p class="text-lg">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-              voluptatum, quod, quae, quia voluptate quos dolorum voluptas
-              voluptatibus quibusdam quas quidem. Quisquam voluptatum, quod,
-              quae, quia voluptate quos dolorum voluptas voluptatibus quibusdam
-              quas quidem.
+                {{comment.text}}
             </p>
           </div>
+          {% endfor %}
         </div>
         <!-- Comment Input -->
         <div class="comment-input">
