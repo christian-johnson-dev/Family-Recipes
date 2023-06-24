@@ -16,8 +16,13 @@
           <h1 class="bg-slate-400">Family Recipies</h1>
           <h3 class="bg-yellow-600">A collection of food and memories</h3>
         </div>
+        {% if session.logged_in == True %}
+        <p>Welcome {{session.first_name}},</p>
+        <a href="/logout"><button class="bg-pink-400">Logout</button></a>
+        {% else %}
+        <a href="/login_reg"><button class="bg-pink-400">Login</button></a>
+        {% endif %}
 
-        <button class="bg-pink-400">Login</button>
       </nav>
     </header>
     <div class="container mx-auto">
@@ -32,7 +37,7 @@
           />
           <button class="bg-red-500 text-white">Search</button>
         </div>
-        <button class="bg-orange-500 text-white">Create</button>
+        <a href="/create_recipe"><button class="bg-orange-500 text-white" >Create</button></a>
       </div>
 
       
@@ -50,7 +55,11 @@
                 <td class="bg-fuchsia-500"><a href="/one_recipe/{{recipe.id}}">{{recipe.title}}</a></td>
                 <td class="bg-slate-400">{{recipe.posted_by.first_name}} {{recipe.posted_by.last_name}}</td>
                 <td>{{recipe.created_at}}</td>
+
+                {%if recipe.posted_by.id==session.user_id%}
                 <td><a href="/delete_recipe/{{recipe.id}}">Delete</a></td>
+                {% endif %}
+                
             </tr>
           {% endfor %}
         </tbody>

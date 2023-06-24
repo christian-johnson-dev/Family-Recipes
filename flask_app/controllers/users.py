@@ -4,14 +4,17 @@ from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 from flask_app.models import user
 
-@app.route('/recipe')
-def recipet_page():
-    return render_template('recipe.html')
+
 
 
 @app.route("/")
+def redirect_list():
+    return redirect("/list")
+
+@app.route("/login_reg")
 def index():
     return render_template("index.html")
+
 
 @app.route("/register", methods=["POST"])
 def register():
@@ -32,7 +35,7 @@ def register():
         session["password"] = data["password"]
         session["logged_in"] = True
 
-    return render_template("wall.html")
+    return redirect("/list")
 
 @app.route("/login", methods=["POST"])
 def login():
@@ -51,8 +54,9 @@ def login():
     
     session['user_id']=user_from_db.id
     session['email']=request.form['email']
+    session['first_name']=user_from_db.first_name
     session['logged_in'] = True
-    return redirect("/success")
+    return redirect("/list")
     
 @app.route("/success")
 def success_display():
@@ -63,4 +67,4 @@ def success_display():
 @app.route("/logout")
 def logout():
     session.clear()
-    return redirect(url_for("index"))
+    return redirect("/list")

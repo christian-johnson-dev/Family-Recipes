@@ -42,23 +42,25 @@
           <h3 class="bg-yellow-600">A collection of food and memories</h3>
         </div>
 
-        <button class="bg-pink-400">Login</button>
+        <a href="/logout"><button class="bg-pink-400">Logout</button></a>
       </nav>
     </header>
     <div class="container mx-auto">
-      <a href="#">&lt;&lt; Back to recipes list</a>
+      <a href="/list">&lt;&lt; Back to recipes list</a>
       <!-- * NAME, INGREDIENTS & IMAGE Section -->
       <section class="top-section flex flex-col-reverse md:flex-row">
         <div class="w-full md:w-1/2">
           <!-- * Name -->
           <div class="recipe-title-group">
             <h2 class="text-3xl">{{recipe.title}}</h2>
+            {%if recipe.posted_by.id==session.user_id%}
             <button
               id="modal-name-btn"
               class="mr-4 bg-black text-white px-2 py-0.5 text-sm rounded-full"
             >
               edit
             </button>
+            {% endif %}
             <!-- <p class="text-xl">Contributed by {{recipe.posted_by.first_name}} {{recipe.posted_by.last_name}}</p>
             <p class="text-xl">Created on {{recipe.created_at}}</p>
             <p class="text-xl">Last updated on {{recipe.updated_at}}</p> -->
@@ -67,12 +69,14 @@
           <div class="recipe-ingredients-group mt-8">
             <div class="ingredient-header flex justify-between">
               <h3 class="text-2xl underline">Ingredients</h3>
+              {%if recipe.posted_by.id==session.user_id%}
               <button
                 id="modal-ingredient-btn"
                 class="mr-4 bg-black text-white px-2 py-0.5 text-sm rounded-full"
               >
                 edit
               </button>
+              {% endif %}
             </div>
             {{recipe.ingredients}}
           </div>
@@ -90,12 +94,14 @@
       <section class="w-full">
         <header class="section-header bg-slate-400 mt-8 relative">
           <h3 class="text-white text-xl text-center">Description</h3>
+          {%if recipe.posted_by.id==session.user_id%}
           <button
             id="modal-description-btn"
             class="mr-4 bg-black text-white px-2 py-0.5 text-sm rounded-full"
           >
             edit
           </button>
+          {% endif %}
         </header>
         <div class="content-wrapper flex justify-center">
           <div class="columns-2 mx-4 mt-4">
@@ -109,17 +115,14 @@
       <section class="w-full">
         <header class="section-header bg-slate-400 mt-8">
           <h3 class="text-white text-xl text-center">Instructions</h3>
+          {%if recipe.posted_by.id==session.user_id%}
           <button
             id="modal-instructions-btn"
-            class="mr-4 bg-black text-white px-2 py-0.5 text-sm rounded-full"
-          >
-            edit instructions
-          </button>
-          <!-- <button
-            class="absolute right-2 mr-4 bg-black text-white px-2 py-0.5 text-sm rounded-full top-1/2 transform -translate-y-1/2"
-          >
+            class="mr-4 bg-black text-white px-2 py-0.5 text-sm rounded-full">
             edit
-          </button> -->
+          </button>
+          {% endif %}
+          
         </header>
         <div class="content-wrapper flex justify-center">
           <div class="columns-2 mx-4 mt-4">
@@ -132,11 +135,6 @@
       <section class="w-full">
         <header class="section-header bg-slate-400 mt-8 relative">
           <h3 class="text-white text-xl text-center">Comments</h3>
-          <button
-            class="absolute right-2 mr-4 bg-black text-white px-2 py-0.5 text-sm rounded-full top-1/2 transform -translate-y-1/2"
-          >
-            edit
-          </button>
         </header>
         <div class="content-wrapper flex justify-center">
           <div class="columns-2 mx-4 mt-4">
@@ -159,10 +157,12 @@
                 <h4 class="text-xl">{{comment.posted_by.first_name}}</h4>
                 <p class="text-sm">{{comment.created_at.strftime("%m/%d/%Y, %H:%M:%S")}}</p>
               </div>
+              {% if comment.posted_by.id == session.user_id%}
               <div class="controls">
                 <button>edit</button>
                 <a href="/delete_comment/{{comment.recipe_id}}/{{comment.id}}"><button>delete</button></a>
               </div>
+              {% endif %}
             </div>
             <p class="text-lg">
                 {{comment.text}}
