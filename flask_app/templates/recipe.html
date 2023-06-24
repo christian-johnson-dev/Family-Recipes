@@ -64,16 +64,16 @@
         <div class="w-full md:w-1/2">
           <!-- * Name -->
           <div class="recipe-title-group">
-            <h2 class="text-3xl">Macaroni and Ementhaller</h2>
+            <h2 class="text-3xl">{{recipe.title}}</h2>
             <button
               id="modal-name-btn"
               class="mr-4 bg-black text-white px-2 py-0.5 text-sm rounded-full"
             >
               edit
             </button>
-            <p class="text-xl">Contributed by Missy Hays</p>
-            <p class="text-xl">Created on 12/22/2022</p>
-            <p class="text-xl">Last updated on 12/22/2022</p>
+            <!-- <p class="text-xl">Contributed by {{recipe.posted_by.first_name}} {{recipe.posted_by.last_name}}</p>
+            <p class="text-xl">Created on {{recipe.created_at}}</p>
+            <p class="text-xl">Last updated on {{recipe.updated_at}}</p> -->
           </div>
           <!-- * Ingredients -->
           <div class="recipe-ingredients-group mt-8">
@@ -86,17 +86,7 @@
                 edit
               </button>
             </div>
-
-            <ul>
-              <li>1 lb macaroni</li>
-              <li>1 lb ementhaller</li>
-              <li>1/2 cup butter</li>
-              <li>1/2 cup flour</li>
-              <li>1/2 cup milk</li>
-              <li>1/2 cup cream</li>
-              <li>1/2 cup salt</li>
-              <li>1/2 cup pepper</li>
-            </ul>
+            {{recipe.ingredients}}
           </div>
         </div>
         <!-- * Image -->
@@ -113,6 +103,7 @@
         <header class="section-header bg-slate-400 mt-8 relative">
           <h3 class="text-white text-xl text-center">Description</h3>
           <button
+<<<<<<< HEAD
             class="absolute right-2 mr-4 bg-black text-white px-2 py-0.5 text-sm rounded-full top-1/2 transform -translate-y-1/2"
           >
             edit
@@ -140,6 +131,8 @@
             edit
           </button>
           <button
+=======
+>>>>>>> development
             id="modal-description-btn"
             class="mr-4 bg-black text-white px-2 py-0.5 text-sm rounded-full"
           >
@@ -149,12 +142,7 @@
         <div class="content-wrapper flex justify-center">
           <div class="columns-2 mx-4 mt-4">
             <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio
-              fugiat blanditiis numquam error impedit quasi eius quod mollitia
-              ad vitae magni aliquid alias distinctio quidem inventore officia
-              suscipit quia similique, maiores illum itaque nisi? Molestiae cum
-              sit ipsam error praesentium, odit et quas quaerat eligendi
-              blanditiis nesciunt numquam explicabo ducimus!
+              {{recipe.description}}
             </p>
           </div>
         </div>
@@ -169,16 +157,33 @@
           >
             edit instructions
           </button>
+          <!-- <button
+            class="absolute right-2 mr-4 bg-black text-white px-2 py-0.5 text-sm rounded-full top-1/2 transform -translate-y-1/2"
+          >
+            edit
+          </button> -->
         </header>
         <div class="content-wrapper flex justify-center">
           <div class="columns-2 mx-4 mt-4">
             <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio
-              fugiat blanditiis numquam error impedit quasi eius quod mollitia
-              ad vitae magni aliquid alias distinctio quidem inventore officia
-              suscipit quia similique, maiores illum itaque nisi? Molestiae cum
-              sit ipsam error praesentium, odit et quas quaerat eligendi
-              blanditiis nesciunt numquam explicabo ducimus!
+              {{recipe.directions}}
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="w-full">
+        <header class="section-header bg-slate-400 mt-8 relative">
+          <h3 class="text-white text-xl text-center">Comments</h3>
+          <button
+            class="absolute right-2 mr-4 bg-black text-white px-2 py-0.5 text-sm rounded-full top-1/2 transform -translate-y-1/2"
+          >
+            edit
+          </button>
+        </header>
+        <div class="content-wrapper flex justify-center">
+          <div class="columns-2 mx-4 mt-4">
+            <p>
+
             </p>
           </div>
         </div>
@@ -223,6 +228,7 @@
         </div>
       </section>
     </div>
+<<<<<<< HEAD
     <!-- *  This is the modal for Log in  Registration -->
     <div
       id="modal-login"
@@ -307,28 +313,45 @@
         </div>
       </div>
     </div>
+=======
+>>>>>>> development
     <!-- *  This is the modal for submitting updates for NAME -->
     <div
       id="modal-name"
       class="modal"
     >
       <div class="modal-content">
-        <form action="">
+        <form action="/edit_title" method="POST">
           <span
             id="modal-name-close"
             class="close"
-            >&times;</span
-          >
-          <p>Edit Name:</p>
+            >&times;</span>
+          {% with messages = get_flashed_messages(category_filter=["title"]) %}
+      {% if messages %}
+      {% for message in messages %}
+      <p>{{message}}</p>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+          <p>Edit Title:</p>
           <input
             type="text"
             class="border-2"
+            name="title"
+            minlength="3"
+            value="{{recipe.title}}"
+          />
+          <input
+            type="hidden"
+            class="border-2"
+            name="id"
+            value="{{recipe.id}}"
           />
           <button
             type="submit"
             class="bg-black text-white"
           >
-            Update Name
+            Update Title
           </button>
         </form>
       </div>
@@ -339,7 +362,7 @@
       class="modal"
     >
       <div class="modal-content">
-        <form action="">
+        <form action="/edit_ingredients" method="POST">
           <span
             id="modal-ingredients-close"
             class="close"
@@ -349,6 +372,15 @@
           <input
             type="text"
             class="border-2"
+            minlength="3"
+            name="ingredients"
+            value="{{recipe.ingredients}}"
+          />
+          <input
+            type="hidden"
+            class="border-2"
+            name="id"
+            value="{{recipe.id}}"
           />
           <button
             type="submit"
@@ -365,7 +397,7 @@
       class="modal"
     >
       <div class="modal-content">
-        <form action="">
+        <form action="/edit_directions" method="POST">
           <span
             id="modal-directions-close"
             class="close"
@@ -375,7 +407,17 @@
           <input
             type="text"
             class="border-2"
+            minlength="3"
+            name="directions"
+            value="{{recipe.directions}}"
           />
+          <input
+            type="hidden"
+            class="border-2"
+            name="id"
+            value="{{recipe.id}}"
+          />
+          
           <button
             type="submit"
             class="bg-black text-white"
@@ -391,7 +433,7 @@
       class="modal"
     >
       <div class="modal-content">
-        <form action="">
+        <form action="/edit_description" method="POST">
           <span
             id="modal-description-close"
             class="close"
@@ -401,7 +443,17 @@
           <input
             type="text"
             class="border-2"
+            minlength="3"
+            name="description"
+            value="{{recipe.description}}"
           />
+          <input
+            type="hidden"
+            class="border-2"
+            name="id"
+            value="{{recipe.id}}"
+          />
+          
           <button
             type="submit"
             class="bg-black text-white"

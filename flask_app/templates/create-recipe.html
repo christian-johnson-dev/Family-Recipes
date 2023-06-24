@@ -17,6 +17,7 @@
     <title>Create Recipe</title>
   </head>
   <body>
+<<<<<<< HEAD
     <header class="bg-green-400">
       <nav class="bg-purple-500 container flex mx-auto justify-between">
         <div class="bg-teal-600 flex">
@@ -91,5 +92,68 @@
         </button>
       </form>
     </div>
+=======
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      {% for message in messages %}
+      <p>{{message}}</p>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <form action="/save_recipe" method="POST">
+      <div class="input-wrapper">
+        <label for="title-input">Title:</label>
+        <input
+          id="title-input"
+          type="text"
+          name="title"
+        />
+      </div>
+      <div class="input-wrapper">
+        <label for="ingredients-input">Ingredients:</label>
+        <input
+          id="ingredients-input"
+          type="text"
+          name="ingredients"
+        />
+      </div>
+      <div class="input-wrapper">
+        <label for="instructions-input">img:</label>
+        <input
+          id="instructions-input"
+          type="text"
+          name="img"
+        />
+      </div>
+      <div class="input-wrapper">
+        <label for="instructions-input">Description:</label>
+        <input
+          id="instructions-input"
+          type="text"
+          name="description"
+        />
+      </div>
+      <div class="input-wrapper">
+        <label for="instructions-input">Directions:</label>
+        <input
+          id="instructions-input"
+          type="text"
+          name="directions"
+        />
+      </div>
+      <div class="input-wrapper">
+        <input
+          id="instructions-input"
+          type="hidden"
+          name="user_id"
+          value="{{session.user_id}}"
+        />
+      </div>
+      <button type="submit">Created</button>
+    
+    </form>
+
+    <a href="/logout" style="color:#F28482">Logout</a>
+>>>>>>> development
   </body>
 </html>

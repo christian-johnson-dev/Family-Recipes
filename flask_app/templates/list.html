@@ -35,6 +35,7 @@
         <button class="bg-orange-500 text-white">Create</button>
       </div>
 
+      
       <table class="w-full overflow-y-auto h-[400px]">
         <thead>
           <tr>
@@ -44,111 +45,14 @@
           </tr>
         </thead>
         <tbody class="border-2 border-black">
-          <tr class="border-b-2 border-black">
-            <a href="#">
-              <td class="bg-fuchsia-500">Macaroni and Ementhaller</td>
-              <td class="bg-slate-400">Missy Hays</td>
-              <td>12/22/2022</td>
-            </a>
-          </tr>
-          <tr class="border-b-2 border-black">
-            <a href="#">
-              <td>Cob salad</td>
-              <td>Burt Sampson</td>
-              <td>12//14/2022</td>
-            </a>
-          </tr>
-          <tr class="border-b-2 border-black">
-            <a href="#">
-              <td>Chocolate Buttercream Frosting</td>
-              <td>Missy Hays</td>
-              <td>6/13/2023</td>
-            </a>
-          </tr>
-          <tr class="border-b-2 border-black">
-            <a href="#">
-              <td class="bg-fuchsia-500">Macaroni and Ementhaller</td>
-              <td class="bg-slate-400">Missy Hays</td>
-              <td>12/22/2022</td>
-            </a>
-          </tr>
-          <tr class="border-b-2 border-black">
-            <a href="#">
-              <td>Cob salad</td>
-              <td>Burt Sampson</td>
-              <td>12//14/2022</td>
-            </a>
-          </tr>
-          <tr class="border-b-2 border-black">
-            <a href="#">
-              <td>Chocolate Buttercream Frosting</td>
-              <td>Missy Hays</td>
-              <td>6/13/2023</td>
-            </a>
-          </tr>
-          <tr class="border-b-2 border-black">
-            <a href="#">
-              <td class="bg-fuchsia-500">Macaroni and Ementhaller</td>
-              <td class="bg-slate-400">Missy Hays</td>
-              <td>12/22/2022</td>
-            </a>
-          </tr>
-          <tr class="border-b-2 border-black">
-            <a href="#">
-              <td>Cob salad</td>
-              <td>Burt Sampson</td>
-              <td>12//14/2022</td>
-            </a>
-          </tr>
-          <tr class="border-b-2 border-black">
-            <a href="#">
-              <td>Chocolate Buttercream Frosting</td>
-              <td>Missy Hays</td>
-              <td>6/13/2023</td>
-            </a>
-          </tr>
-          <tr class="border-b-2 border-black">
-            <a href="#">
-              <td class="bg-fuchsia-500">Macaroni and Ementhaller</td>
-              <td class="bg-slate-400">Missy Hays</td>
-              <td>12/22/2022</td>
-            </a>
-          </tr>
-          <tr class="border-b-2 border-black">
-            <a href="#">
-              <td>Cob salad</td>
-              <td>Burt Sampson</td>
-              <td>12//14/2022</td>
-            </a>
-          </tr>
-          <tr class="border-b-2 border-black">
-            <a href="#">
-              <td>Chocolate Buttercream Frosting</td>
-              <td>Missy Hays</td>
-              <td>6/13/2023</td>
-            </a>
-          </tr>
-          <tr class="border-b-2 border-black">
-            <a href="#">
-              <td class="bg-fuchsia-500">Macaroni and Ementhaller</td>
-              <td class="bg-slate-400">Missy Hays</td>
-              <td>12/22/2022</td>
-            </a>
-          </tr>
-          <tr class="border-b-2 border-black">
-            <a href="#">
-              <td>Cob salad</td>
-              <td>Burt Sampson</td>
-              <td>12//14/2022</td>
-            </a>
-          </tr>
-          <tr class="border-b-2 border-black">
-            <a href="#">
-              <td>Chocolate Buttercream Frosting</td>
-              <td>Missy Hays</td>
-              <td>6/13/2023</td>
-            </a>
-          </tr>
+          {% for recipe in recipes%}
+            <tr class="border-b-2 border-black">
+                <td class="bg-fuchsia-500"><a href="/one_recipe/{{recipe.id}}">{{recipe.title}}</a></td>
+                <td class="bg-slate-400">{{recipe.posted_by.first_name}} {{recipe.posted_by.last_name}}</td>
+                <td>{{recipe.created_at}}</td>
+                <td><a href="/delete_recipe/{{recipe.id}}">Delete</a></td>
+            </tr>
+          {% endfor %}
         </tbody>
       </table>
     </div>

@@ -1,7 +1,18 @@
+mysql -u root -p (logs into )
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'rootroot';
+FLUSH PRIVILEGES;
+quit
+
+
 ## Front end
     template
-        create-recipe.html
         list.html (list all recipes)
+            {% for recipe in recipes%}
+            {{recipe.title}}
+            {% endfor %}
+        create-recipe.html
+            add to form /save_recipe
+
         recipe.html (display one recipe)
 
     static
@@ -17,25 +28,25 @@
         recipes
         users
     models
+        recipe
+WORKS       save
+WORKS       get_all_recipes
+WORKS       validate_recipe
+WORKS       get_one_recipe
+WORKS       delete
+
+
+WORKS        change_ingredients
+WORKS        change_title
+WORKS        change_description
+             change_image
+        user
+
         comment
             create (save)
             delete
             edit (change)
             get_all
-        recipe
-            save
-            get_all_recipes
-            validate_recipe
-            get_one_recipe
-            change
-            delete
-
-            change_ingredients
-            change_title
-            change_description
-            change_image
-        user
-
 ## Branches of development - frontend, backendcomments, backendrecipes
 ## Search by partial in MySQL
 ## Add image
@@ -43,3 +54,4 @@
 ## Ingredients table
 ## Steps table
 ## user route/ needs to list of recipes not index.html
+## edge case of no recipes Indexerror one_recipe/1

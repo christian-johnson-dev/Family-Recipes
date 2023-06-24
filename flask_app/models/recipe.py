@@ -11,6 +11,7 @@ class Recipe:
         self.ingredients = data['ingredients']
         self.img = data['img']
         self.description = data['description']
+        self.directions = data['directions']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
         self.user_id = data['user_id']
@@ -19,8 +20,8 @@ class Recipe:
 
     @classmethod
     def save (cls, data):
-        query = """INSERT INTO recipes (title,ingredients,img,description,user_id)
-                VALUES (%(title)s,%(ingredients)s,%(img)s,%(description)s,%(user_id)s);"""
+        query = """INSERT INTO recipes (title,ingredients,img,description,directions,user_id)
+                VALUES (%(title)s,%(ingredients)s,%(img)s,%(description)s,%(directions)s,%(user_id)s);"""
         result=connectToMySQL(cls.db).query_db(query,data)
         return result
 
@@ -53,13 +54,58 @@ class Recipe:
     
         is_valid = True
         if len(recipe['title'])<3:
-            flash("Title must be at least 3 characters!")
+            flash("Title must be at least 3 characters!","title")
             is_valid = False
         if len(recipe['ingredients'])<3:
-            flash("Ingredients  must be at least 3 characters!")
+            flash("Ingredients  must be at least 3 characters!","ingredients")
             is_valid = False
         if len(recipe['description'])<3:
-            flash("Description  must be at least 3 characters!")
+            flash("Description  must be at least 3 characters!","description")
+            is_valid = False
+        
+        return is_valid
+
+    
+
+    @staticmethod
+    def validate_title(recipe):
+    
+        is_valid = True
+        if len(recipe['title'])<3:
+            flash("Title must be at least 3 characters!","title")
+            is_valid = False
+        
+        return is_valid
+
+    @staticmethod
+    def validate_ingredients(recipe):
+    
+        is_valid = True
+        
+        if len(recipe['ingredients'])<3:
+            flash("Ingredients  must be at least 3 characters!","ingredients")
+            is_valid = False
+        
+        return is_valid
+
+    @staticmethod
+    def validate_description(recipe):
+    
+        is_valid = True
+        
+        if len(recipe['description'])<3:
+            flash("Description  must be at least 3 characters!","description")
+            is_valid = False
+        
+        return is_valid
+
+    @staticmethod
+    def validate_directions(recipe):
+    
+        is_valid = True
+        
+        if len(recipe['directions'])<3:
+            flash("Directions must be at least 3 characters!","directions")
             is_valid = False
         
         return is_valid
@@ -71,17 +117,19 @@ class Recipe:
         WHERE recipes.id= %(id)s;"""
         result=connectToMySQL(cls.db).query_db(query,{'id':id})
         recipe = result[0]
+        print(recipe)
         user_info = {
-                'id' : result['users.id'],
-                'first_name':result['first_name'],
-                'last_name':result['last_name'],
-                'email':result['email'],
-                'password':result['password'],
-                'created_at':result['users.created_at'],
-                'updated_at':result['users.updated_at']
+                'id' : recipe['users.id'],
+                'first_name':recipe['first_name'],
+                'last_name':recipe['last_name'],
+                'email':recipe['email'],
+                'password':recipe['password'],
+                'created_at':recipe['users.created_at'],
+                'updated_at':recipe['users.updated_at']
                 }
+        recipe = cls(recipe)        
         recipe.posted_by=User(user_info)
-        recipe.comments=Comment.get_comments_by_recipe_id(id)
+        # recipe.comments=Comment.get_recipes_comments(id)
         return recipe
 
     @classmethod
@@ -108,6 +156,13 @@ class Recipe:
     @classmethod
     def change_description(cls,data):
         query="""UPDATE recipes SET description=%(description)s
+                WHERE id=%(id)s;"""
+        result=connectToMySQL(cls.db).query_db(query,data)
+        return result
+    
+    @classmethod
+    def change_directions(cls,data):
+        query="""UPDATE recipes SET directions=%(directions)s
                 WHERE id=%(id)s;"""
         result=connectToMySQL(cls.db).query_db(query,data)
         return result

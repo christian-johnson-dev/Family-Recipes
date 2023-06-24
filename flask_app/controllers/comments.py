@@ -11,7 +11,7 @@ def display_create_comment():
     else:
         return redirect("/")
 
-@app.route("/create_comment/<recipe_id>")
+@app.route("/create_comment/<recipe_id>", methods=["POST"])
 def create_comment(recipe_id):
     data = request.form
     comment.Comment.save(data)
@@ -22,6 +22,7 @@ def delete_comment(id):
     comment.Comment.delete(id)
     return redirect()
 
-@app.route("edit_comment/<id>")
+@app.route("edit_comment/<id>", methods=["POST"])
 def edit_comment(id):
     comment.Comment.edit()
+    return redirect("")

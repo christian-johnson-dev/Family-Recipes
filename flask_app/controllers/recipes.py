@@ -1,23 +1,23 @@
-from flask_app import app, render_template, session, redirect,request
+from flask_app import app
+from flask import render_template, session, redirect,request
 from flask_app.models.recipe import Recipe
 
 
 @app.route("/list")
 def recipes():
-    if 'user_id' not in session:
+    if session.get('logged_in') != True:
         return redirect("/logout")
     return render_template("list.html",recipes = Recipe.get_all_recipes())
 
 @app.route("/create_recipe")
 def show_recipe_form():
-    if 'user_id' not in session:
+    if session['logged_in'] == False:
         return redirect("/logout")
     return render_template("create-recipe.html")
 
-@app.route("/save_recipe", methods=['post'])
+@app.route("/save_recipe", methods=['POST'])
 def create_recipe():
-    print(request.form)
-    if 'user_id' not in session:
+    if session.get('logged_in') == False:
         return redirect("/logout")
     if not Recipe.validate_recipe(request.form):
         return redirect("/create_recipe")
@@ -26,10 +26,10 @@ def create_recipe():
 
 @app.route('/one_recipe/<int:id>')
 def show_recipe(id):
-    if session.get('logged_in') == True:
+    if session.get('logged_in') == False:
         return redirect("/logout")
     session['recipe_id']=id
-    recipe = Recipe.get_one(id)
+    recipe = Recipe.get_one_recipe(id)
     
     return render_template("recipe.html",recipe=recipe)
 
@@ -43,9 +43,9 @@ def show_recipe(id):
 
 @app.route('/edit_title', methods=['post'])
 def edit_title():
-    if session.get('logged_in') == True:
+    if session.get('logged_in') == False:
         return redirect("/logout")
-    if not Recipe.validate_recipe(request.form):
+    if not Recipe.validate_title(request.form):
         print(request.form)
 
         return redirect(f"/one_recipe/{request.form['id']}")
@@ -54,9 +54,9 @@ def edit_title():
 
 @app.route('/edit_ingredients', methods=['post'])
 def edit_ingredients():
-    if session.get('logged_in') == True:
+    if session.get('logged_in') == False:
         return redirect("/logout")
-    if not Recipe.validate_recipe(request.form):
+    if not Recipe.validate_ingredients(request.form):
         print(request.form)
 
         return redirect(f"/one_recipe/{request.form['id']}")
@@ -65,32 +65,40 @@ def edit_ingredients():
 
 @app.route('/edit_img', methods=['post'])
 def edit_img():
-    if session.get('logged_in') == True:
+    if session.get('logged_in') == False:
         return redirect("/logout")
-    if not Recipe.validate_recipe(request.form):
-        print(request.form)
-
-        return redirect(f"/one_recipe/{request.form['id']}")
+    
     Recipe.change_img(request.form)
     return redirect(f"/one_recipe/{request.form['id']}")
 
 @app.route('/edit_description', methods=['post'])
-def edit_title():
-    if session.get('logged_in') == True:
+def edit_description():
+    if session.get('logged_in') == False:
         return redirect("/logout")
-    if not Recipe.validate_recipe(request.form):
+    if not Recipe.validate_description(request.form):
         print(request.form)
 
         return redirect(f"/one_recipe/{request.form['id']}")
     Recipe.change_description(request.form)
     return redirect(f"/one_recipe/{request.form['id']}")
 
-@app.route('/recipes/delete/<int:id>')
+@app.route('/edit_directions', methods=['post'])
+def edit_directions():
+    if session.get('logged_in') == False:
+        return redirect("/logout")
+    if not Recipe.validate_directions(request.form):
+        print(request.form)
+
+        return redirect(f"/one_recipe/{request.form['id']}")
+    Recipe.change_directions(request.form)
+    return redirect(f"/one_recipe/{request.form['id']}")
+
+@app.route('/delete_recipe/<int:id>')
 def delete_recipe(id):
-    if session.get('logged_in') == True:
+    if session.get('logged_in') == False:
         return redirect("/logout")
     Recipe.delete(id)
-    return redirect ("/recipes")
+    return redirect ("/list")
 
 
 
