@@ -15,14 +15,14 @@ def display_create_comment():
 def create_comment(recipe_id):
     data = request.form
     comment.Comment.save(data)
-    return redirect()
+    return redirect(f"/one_recipe/{recipe_id}")
 
 @app.route("/delete_comment/<recipe_id>/<id>")
 def delete_comment(id,recipe_id):
     comment.Comment.delete(id)
     return redirect(f"/one_recipe/{recipe_id}")
 
-@app.route("/edit_comment/<id>", methods=["POST"])
+@app.route("/edit_comment/<id>")
 def edit_comment(id):
-    comment.Comment.edit()
-    return redirect("")
+    comment.Comment.change(id)
+    return redirect(f"")

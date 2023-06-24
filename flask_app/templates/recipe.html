@@ -171,17 +171,21 @@
           {% endfor %}
         </div>
         <!-- Comment Input -->
-        <div class="comment-input">
-          <label for="">Your comment:</label>
-          <textarea
-            name=""
-            id=""
-            cols="30"
-            rows="10"
-            class="border-2 w-full"
-          ></textarea>
-          <button class="bg-black text-white">Submit</button>
-        </div>
+        <form action="/create_comment/{{recipe.id}}", method="POST">
+          <input type="hidden" name="user_id" value='{{session["user_id"]}}'>
+          <input type="hidden" name="recipe_id" value='{{recipe.id}}'>
+          <div class="comment-input">
+            <label for="text">Your comment:</label>
+            <textarea
+              name="text"
+              id="text"
+              cols="30"
+              rows="10"
+              class="border-2 w-full"
+            ></textarea>
+            <button class="bg-black text-white">Submit</button>
+          </div>
+        </form>
       </section>
     </div>
     <!-- *  This is the modal for submitting updates for NAME -->
