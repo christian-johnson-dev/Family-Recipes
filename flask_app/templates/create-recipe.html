@@ -6,69 +6,190 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0"
     />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+      @layer components {
+        .text-input {
+          @apply border-2  border-amber-700 shadow-lg w-full p-2 rounded-md text-amber-700;
+        }
+        .input-wrapper {
+          @apply flex flex-col;
+        }
+        .input-wrapper label {
+          @apply text-xl text-amber-700;
+        }
+        .input-field {
+          @apply border-2 border-amber-700 shadow-lg w-full h-10 p-2 rounded-md;
+        }
+      }
+    </style>
     <title>Create Recipe</title>
   </head>
-  <body>
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-      {% for message in messages %}
-      <p>{{message}}</p>
-    {% endfor %}
-    {% endif %}
-    {% endwith %}
-    <form action="/save_recipe" method="POST">
-      <div class="input-wrapper">
-        <label for="title-input">Title:</label>
-        <input
-          id="title-input"
-          type="text"
-          name="title"
-        />
-      </div>
-      <div class="input-wrapper">
-        <label for="ingredients-input">Ingredients:</label>
-        <input
-          id="ingredients-input"
-          type="text"
-          name="ingredients"
-        />
-      </div>
-      <div class="input-wrapper">
-        <label for="instructions-input">img:</label>
-        <input
-          id="instructions-input"
-          type="text"
-          name="img"
-        />
-      </div>
-      <div class="input-wrapper">
-        <label for="instructions-input">Description:</label>
-        <input
-          id="instructions-input"
-          type="text"
-          name="description"
-        />
-      </div>
-      <div class="input-wrapper">
-        <label for="instructions-input">Directions:</label>
-        <input
-          id="instructions-input"
-          type="text"
-          name="directions"
-        />
-      </div>
-      <div class="input-wrapper">
-        <input
-          id="instructions-input"
-          type="hidden"
-          name="user_id"
-          value="{{session.user_id}}"
-        />
-      </div>
-      <button type="submit">Created</button>
-    
-    </form>
 
-    <a href="/logout" style="color:#F28482">Logout</a>
+  <body class="bg-amber-100">
+    <header class="bg-amber-700">
+      <nav class="container flex mx-auto justify-between items-center">
+        <div
+          class="py-3 flex items-center justify-center md:justify-start w-full md:w-auto"
+        >
+          <h1 class="text-3xl md:text-5xl text-amber-200 mx-auto md:mx-0">
+            Family Recipies
+          </h1>
+          <h3 class="hidden text-amber-200 md:inline-block pl-5">
+            A collection of food and memories
+          </h3>
+        </div>
+
+        <a href="/logout"
+          ><button
+            class="bg-amber-600 rounded-full mr-4 md:mr-0 px-4 py-2 text-amber-800 hover:bg-amber-200 transition-colors duration-300"
+          >
+            Logout
+          </button></a
+        >
+      </nav>
+    </header>
+    <div class="container mx-auto px-8">
+      <h1 class="text-2xl my-3 md:text-4xl text-amber-700">Create Recipe</h1>
+      <form
+        action="/save_recipe"
+        method="POST"
+        class="flex flex-col gap-6"
+      >
+        <!--* TITLE INPUT -->
+        <div class="input-wrapper">
+          <label for="title-input">Title:</label>
+          <input
+            id="title-input"
+            type="text"
+            required
+            minlength="3"
+            class="text-input"
+          />
+        </div>
+
+        <!--* INGREDIENT INPUT -->
+        <div class="input-wrapper">
+          <label for="ingredients-input">Ingredients:</label>
+          <textarea
+            id="ingredients-input"
+            required
+            minlength="3"
+            class="text-input h-32"
+          ></textarea>
+        </div>
+
+        <!--* INSTRUCTION INPUT -->
+        <div class="input-wrapper">
+          <label for="instructions-input">Instructions:</label>
+          <textarea
+            id="instructions-input"
+            required
+            minlength="3"
+            class="text-input h-32"
+          ></textarea>
+        </div>
+
+        <!--* DESCRIPTION INPUT -->
+        <div class="input-wrapper">
+          <label for="description-input">Description:</label>
+          <textarea
+            id="description-input"
+            required
+            minlength="3"
+            class="text-input h-32"
+          ></textarea>
+        </div>
+
+        <!--* IMAGE INPUT -->
+        <div class="flex justify-between">
+          <!--* ADD IMAGE BUTTON -->
+          <div class="flex items-center">
+            <label
+              for="image-input"
+              class="px-4 py-2 bg-amber-50 border-2 border-amber-700 text-amber-700 rounded-md shadow-lg cursor-pointer"
+              >Add Image:</label
+            >
+            <input
+              id="image-input"
+              type="file"
+              accept="image/*"
+              class="w-0 h-0 opacity-0 cursor-pointer"
+            />
+            <span
+              id="file-name"
+              class="ml-4 text-amber-700"
+              >No file selected</span
+            >
+            <button
+              id="remove-button"
+              type="button"
+              style="display: none"
+              class="ml-2 w-5 h-5 flex items-center justify-center rounded-full text-xs bg-rose-700 text-white"
+            >
+              &#10005;
+            </button>
+          </div>
+        </div>
+
+        <!--* USER ID INPUT -->
+        <div class="input-wrapper">
+          <input
+            id="instructions-input"
+            type="hidden"
+            name="user_id"
+            value="{{session.user_id}}"
+          />
+        </div>
+        <!-- * ERROR MESSAGES -->
+        {% with messages = get_flashed_messages() %} {% if messages %} {% for
+        message in messages %}
+        <p>{{message}}</p>
+        {% endfor %} {% endif %} {% endwith %}
+
+        <!--* SUBMIT BUTTON -->
+        <button
+          type="submit"
+          class="bg-amber-600 border-amber-800 shadow-lg border-2 text-amber-100 p-2 rounded-md uppercase tracking-widest mb-3"
+        >
+          Create
+        </button>
+      </form>
+      <a
+        href="/list"
+        class="text-amber-700 hover:text-amber-800 cursor-pointer pt-6 text-2xl"
+        >Cancel</a
+      >
+    </div>
+    <script>
+      var fileInput = document.getElementById("image-input");
+      var removeButton = document.getElementById("remove-button");
+
+      fileInput.addEventListener("change", function () {
+        var filePath = this.value;
+        var filename = filePath.split("\\").pop();
+        document.getElementById("file-name").textContent = filename
+          ? filename
+          : "No file selected";
+
+        // Show or hide the remove button based on whether a file was selected
+        removeButton.style.display = filename ? "inline-block" : "none";
+      });
+
+      removeButton.addEventListener("click", function (e) {
+        // Prevent the form from submitting if it's part of a form
+        e.preventDefault();
+
+        // Stop event propagation
+        e.stopPropagation();
+
+        // Clear the file input field
+        fileInput.value = "";
+
+        // Update the file name and hide the remove button
+        document.getElementById("file-name").textContent = "No file selected";
+        removeButton.style.display = "none";
+      });
+    </script>
   </body>
 </html>
