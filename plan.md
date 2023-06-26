@@ -11,7 +11,6 @@ one_recipe
         hide comment submit box and submit button
         click username go to their recipes
     comments
-        mysql order by date
         edit button
 
 Create  
