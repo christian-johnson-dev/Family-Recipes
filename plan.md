@@ -1,15 +1,28 @@
-mysql -u root -p (logs into )
-ALTER USER 'root'@'localhost' IDENTIFIED BY 'rootroot';
-FLUSH PRIVILEGES;
-quit
+List
+    Search bar
+    change date with strftime June 23 2023
+
+one_recipe
+    recipe
+        date submitted June 23 2023
+        img upload
+        change to allow non login user
+        hide edit buttons for one recipe
+        hide comment submit box and submit button
+        click username go to their recipes
+    comments
+        mysql order by date
+        edit button
+
+Create  
+    bad request 
+
+
 
 
 ## Front end
     template
         list.html (list all recipes)
-            {% for recipe in recipes%}
-            {{recipe.title}}
-            {% endfor %}
         create-recipe.html
             add to form /save_recipe
 
@@ -55,3 +68,8 @@ WORKS        change_description
 ## Steps table
 ## user route/ needs to list of recipes not index.html
 ## edge case of no recipes Indexerror one_recipe/1
+
+mysql -u root -p (logs into )
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'rootroot';
+FLUSH PRIVILEGES;
+quit
