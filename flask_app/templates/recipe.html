@@ -61,14 +61,13 @@
             A collection of food and memories
           </h3>
         </div>
+        
 
-        <a href="/logout"
-          ><button
-            class="bg-amber-600 rounded-full mr-4 md:mr-0 px-4 py-2 text-amber-800 hover:bg-amber-200 transition-colors duration-300"
-          >
-            Logout
-          </button></a
-        >
+        {% if session.user_id %}
+        <a href="/logout"><button class="bg-pink-400">Logout</button></a>
+        {% else %}
+        <a href="/login_reg"><button class="bg-pink-400">Login</button></a>
+        {% endif %}
       </nav>
     </header>
     <!-- * ========== PAGE CONTENT ========== -->
@@ -251,6 +250,7 @@
           </div>
           {% endfor %}
         </div>
+        {% if session.user_id %}
         <!-- Comment Input -->
         <form
           action="/create_comment/{{recipe.id}}"
@@ -284,6 +284,7 @@
             </button>
           </div>
         </form>
+        {% endif %}
       </section>
     </div>
     <!-- * ========== MODALS ========== -->

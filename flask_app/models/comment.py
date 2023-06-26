@@ -40,11 +40,18 @@ class Comment:
     # Given a recipe id this will return all comments
     @classmethod
     def get_recipes_comments(cls, id):
-        query = """SELECT * FROM comments
-                    LEFT JOIN recipes ON comments.recipe_id=recipes.id
-                    LEFT JOIN users ON recipes.user_id=users.id 
-                    WHERE recipes.id = %(id)s;"""
+        # query = """SELECT * FROM comments
+        #             LEFT JOIN recipes ON comments.recipe_id=recipes.id
+        #             LEFT JOIN users ON recipes.user_id=users.id 
+        #             WHERE comments.user_id = %(id)s;"""
         
+        query = """
+                SELECT * FROM comments
+                JOIN users on comments.user_id=users.id
+                WHERE comments.recipe_id = %(id)s
+                ORDER BY comments.created_at DESC;
+                """
+
         results = connectToMySQL(cls.db).query_db(query,{"id":id})
         comments = []
         for result in results:
