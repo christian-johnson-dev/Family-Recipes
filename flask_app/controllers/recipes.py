@@ -25,8 +25,8 @@ def create_recipe():
 
 @app.route('/one_recipe/<int:id>')
 def show_recipe(id):
-    if session.get('logged_in') != True:
-        return redirect("/login_reg")
+    # if session.get('logged_in') != True:
+    #     return redirect("/login_reg")
     session['recipe_id']=id
     recipe = Recipe.get_one_recipe(id)
     

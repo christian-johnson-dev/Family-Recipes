@@ -41,8 +41,13 @@
           <h1 class="bg-slate-400">Family Recipies</h1>
           <h3 class="bg-yellow-600">A collection of food and memories</h3>
         </div>
+        
 
+        {% if session.user_id %}
         <a href="/logout"><button class="bg-pink-400">Logout</button></a>
+        {% else %}
+        <a href="/login_reg"><button class="bg-pink-400">Login</button></a>
+        {% endif %}
       </nav>
     </header>
     <div class="container mx-auto">
@@ -170,6 +175,7 @@
           </div>
           {% endfor %}
         </div>
+        {% if session.user_id %}
         <!-- Comment Input -->
         <form action="/create_comment/{{recipe.id}}", method="POST">
           <input type="hidden" name="user_id" value='{{session["user_id"]}}'>
@@ -186,6 +192,7 @@
             <button class="bg-black text-white">Submit</button>
           </div>
         </form>
+        {% endif %}
       </section>
     </div>
     <!-- *  This is the modal for submitting updates for NAME -->
