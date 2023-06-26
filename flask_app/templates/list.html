@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0"
     />
-    <title>Family Recipies</title>
+    <title>Family Recipes</title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
@@ -26,20 +26,21 @@
       </nav>
     </header>
     <div class="container mx-auto">
-      <div class="flex justify-between my-5">
-        <div class="search-bar">
-          <label for="searchinput">Search</label>
-          <input
-            name="search-input"
-            type="text"
-            id="searchinput"
-            class="border-2 border-gray-400"
-          />
-          <button class="bg-red-500 text-white">Search</button>
+      <form action="/search_recipes" method="POST">
+        <div class="flex justify-between my-5">
+          <div class="search-bar">
+            <label for="searchinput">Search</label>
+            <input
+              name="search"
+              type="text"
+              id="searchinput"
+              class="border-2 border-gray-400"
+            />
+            <button class="bg-red-500 text-white">Search</button>
+          </div>
+          <a href="/create_recipe"><button class="bg-orange-500 text-white" >Create</button></a>
         </div>
-        <a href="/create_recipe"><button class="bg-orange-500 text-white" >Create</button></a>
-      </div>
-
+      </form>
       
       <table class="w-full overflow-y-auto h-[400px]">
         <thead>

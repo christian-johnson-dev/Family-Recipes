@@ -8,6 +8,14 @@ from flask_app.models.recipe import Recipe
 def recipes():
     return render_template("list.html",recipes = Recipe.get_all_recipes())
 
+@app.route('/search_recipes', methods=["POST"])
+def search_recipe():
+    data = {
+        'search' : '%'+request.form['search']+'%'
+    }
+    recipes = Recipe.search(data)
+    return render_template("list.html",recipes=recipes)
+
 @app.route("/create_recipe")
 def show_recipe_form():
     if session.get('logged_in') != True:
@@ -98,8 +106,6 @@ def delete_recipe(id):
         return redirect("/login_reg")
     Recipe.delete(id)
     return redirect ("/list")
-
-
 
 
 
