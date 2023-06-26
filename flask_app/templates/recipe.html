@@ -28,152 +28,231 @@
           border: 1px solid #888;
           width: 80%;
         }
+        .section-banner-btwn {
+          @apply bg-amber-700 flex justify-between items-center px-4 py-2;
+        }
+
+        .edit-button-lt {
+          @apply bg-amber-600 text-amber-700 px-2  text-sm h-5 rounded-full hover:bg-amber-200 transition-colors duration-300;
+        }
+        .edit-button-dk {
+          @apply bg-amber-700 text-amber-200 px-2  text-sm h-5 rounded-full hover:bg-amber-600 transition-colors duration-300;
+        }
+
+        .overflow-columns {
+          column-fill: auto;
+        }
       }
     </style>
 
-    <title>Document</title>
+    <title>Family Recipe</title>
   </head>
-  <body>
-    <!-- * HEADER BAR -->
-    <header class="bg-green-400">
-      <nav class="bg-purple-500 container flex mx-auto justify-between">
-        <div class="bg-teal-600 flex">
-          <h1 class="bg-slate-400">Family Recipies</h1>
-          <h3 class="bg-yellow-600">A collection of food and memories</h3>
+  <body class="bg-amber-100">
+    <!-- * ========== SITE HEADER ========== -->
+    <header class="bg-amber-700">
+      <nav class="container flex mx-auto justify-between items-center">
+        <div
+          class="py-3 flex items-center justify-center md:justify-start w-full md:w-auto"
+        >
+          <h1 class="text-3xl md:text-5xl text-amber-200 mx-auto md:mx-0">
+            Family Recipies
+          </h1>
+          <h3 class="hidden text-amber-200 md:inline-block pl-5">
+            A collection of food and memories
+          </h3>
         </div>
 
-        <a href="/logout"><button class="bg-pink-400">Logout</button></a>
+        <a href="/logout"
+          ><button
+            class="bg-amber-600 rounded-full mr-4 md:mr-0 px-4 py-2 text-amber-800 hover:bg-amber-200 transition-colors duration-300"
+          >
+            Logout
+          </button></a
+        >
       </nav>
     </header>
+    <!-- * ========== PAGE CONTENT ========== -->
     <div class="container mx-auto">
-      <a href="/list">&lt;&lt; Back to recipes list</a>
+      <!-- * Link back to list & Display recipe author &  -->
+      <div class="flex justify-between items-center text-amber-700 py-2">
+        <a href="/list">&lt;&lt; Back to recipes list</a>
+        <p class="hidden md:flex text-sm">
+          <!-- TODO can we make this name clickable back to List with a display of all their recipies? -->
+          By:
+          <span class="edit-button-dk"
+            >{{recipe.posted_by.first_name}}
+            {{recipe.posted_by.last_name}}</span
+          >
+          on {{recipe.created_at}}
+        </p>
+      </div>
+
       <!-- * NAME, INGREDIENTS & IMAGE Section -->
+      <!-- Displayed on Mobile, Hidden when  >= Tablet -->
+      <div class="flex flex-col md:hidden">
+        <div class="flex justify-between">
+          <h2 class="text-4xl text-amber-700">{{recipe.title}}</h2>
+          {%if recipe.posted_by.id==session.user_id%}
+          <button
+            id="modal-name-btn"
+            class="edit-button-dk mt-2 mr-2"
+          >
+            edit
+          </button>
+          {% endif %}
+        </div>
+        <div class="flex justify-end text-sm text-amber-700">
+          By:
+          <span class="edit-button-dk"
+            >{{recipe.posted_by.first_name}}
+            {{recipe.posted_by.last_name}}</span
+          >
+          on {{recipe.created_at}}
+        </div>
+      </div>
       <section class="top-section flex flex-col-reverse md:flex-row">
         <div class="w-full md:w-1/2">
-          <!-- * Name -->
-          <div class="recipe-title-group">
-            <h2 class="text-3xl">{{recipe.title}}</h2>
+          <!-- * Name & edit button  hidden on mobile, displayed when >= tablet-->
+          <div class="hidden md:flex justify-between">
+            <h2 class="text-4xl text-amber-700">{{recipe.title}}</h2>
             {%if recipe.posted_by.id==session.user_id%}
             <button
               id="modal-name-btn"
-              class="mr-4 bg-black text-white px-2 py-0.5 text-sm rounded-full"
+              class="edit-button-dk mt-2 mr-2"
             >
               edit
             </button>
             {% endif %}
-            <!-- <p class="text-xl">Contributed by {{recipe.posted_by.first_name}} {{recipe.posted_by.last_name}}</p>
-            <p class="text-xl">Created on {{recipe.created_at}}</p>
-            <p class="text-xl">Last updated on {{recipe.updated_at}}</p> -->
           </div>
+
           <!-- * Ingredients -->
-          <div class="recipe-ingredients-group mt-8">
-            <div class="ingredient-header flex justify-between">
-              <h3 class="text-2xl underline">Ingredients</h3>
+          <div class="recipe-ingredients-group mt-8 flex flex-col">
+            <div class="section-banner-btwn">
+              <h3 class="text-3xl text-amber-200">Ingredients</h3>
               {%if recipe.posted_by.id==session.user_id%}
               <button
                 id="modal-ingredient-btn"
-                class="mr-4 bg-black text-white px-2 py-0.5 text-sm rounded-full"
+                class="edit-button-lt"
               >
                 edit
               </button>
               {% endif %}
             </div>
-            {{recipe.ingredients}}
+            <p class="text-amber-700 px-2 md:columns-2 overflow-auto">
+              {{recipe.ingredients}}
+            </p>
           </div>
         </div>
         <!-- * Image -->
-        <div class="w-full md:w-1/2 overflow-hidden aspect-square rounded-xl">
+        <div
+          class="w-full md:w-1/2 md:ml-4 overflow-hidden aspect-square rounded-xl"
+        >
           <img
-            class="hero-image"
-            src="https://images.unsplash.com/photo-1612892010343-983bfd063dc5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80"
-            alt="Macaroni and Ementhaller"
+            class=""
+            src="https://images.unsplash.com/photo-1625876981820-be17a6807189?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80"
+            alt="cookies"
           />
         </div>
       </section>
       <!-- * DESCRIPTION Section -->
-      <section class="w-full">
-        <header class="section-header bg-slate-400 mt-8 relative">
-          <h3 class="text-white text-xl text-center">Description</h3>
+      <section class="w-full mt-4">
+        <header class="section-banner-btwn relative">
+          <h3 class="text-amber-200 w-full text-3xl md:text-center">
+            Description
+          </h3>
           {%if recipe.posted_by.id==session.user_id%}
           <button
             id="modal-description-btn"
-            class="mr-4 bg-black text-white px-2 py-0.5 text-sm rounded-full"
+            class="edit-button-lt absolute right-4"
           >
             edit
           </button>
           {% endif %}
         </header>
         <div class="content-wrapper flex justify-center">
-          <div class="columns-2 mx-4 mt-4">
-            <p>
-              {{recipe.description}}
-            </p>
+          <div class="columns-1 md:columns-2 max-h-min">
+            {{recipe.description}}
           </div>
         </div>
       </section>
       <!-- * INSTRUCTIONS Section -->
-      <section class="w-full">
-        <header class="section-header bg-slate-400 mt-8">
-          <h3 class="text-white text-xl text-center">Instructions</h3>
+      <section class="w-full mt-5">
+        <header class="section-banner-btwn relative">
+          <h3 class="text-amber-200 w-full text-3xl md:text-center">
+            Instructions
+          </h3>
           {%if recipe.posted_by.id==session.user_id%}
           <button
             id="modal-instructions-btn"
-            class="mr-4 bg-black text-white px-2 py-0.5 text-sm rounded-full">
+            class="edit-button-lt absolute right-4"
+          >
             edit
           </button>
           {% endif %}
-          
         </header>
         <div class="content-wrapper flex justify-center">
           <div class="columns-2 mx-4 mt-4">
-            <p>
-              {{recipe.directions}}
-            </p>
-          </div>
-        </div>
-      </section>
-      <section class="w-full">
-        <header class="section-header bg-slate-400 mt-8 relative">
-          <h3 class="text-white text-xl text-center">Comments</h3>
-        </header>
-        <div class="content-wrapper flex justify-center">
-          <div class="columns-2 mx-4 mt-4">
-            <p>
-
-            </p>
+            <p>{{recipe.directions}}</p>
           </div>
         </div>
       </section>
       <!-- * SOCIAL COMMENTS SECTION -->
+      <section class="w-full mt-5">
+        <header class="section-banner-btwn">
+          <h3 class="text-amber-200 w-full text-3xl md:text-center">
+            Comments
+          </h3>
+        </header>
+      </section>
+
       <section>
         <!-- Previous Comments -->
-        <div class="comments">
+        <div class="mx-4">
           {% for comment in recipe.comments%}
           <div
-            class="comment border border-black shadow-xl px-4 py-4 rounded-xl"
+            class="comment border border-amber-600 bg-amber-50 px-4 py-4 rounded-xl text-amber-700 my-4"
           >
-            <div class="comment-header flex justify-between">
+            <div
+              class="comment-header flex justify-between border-b border-amber-700"
+            >
               <div class="comment-author">
-                <h4 class="text-xl">{{comment.posted_by.first_name}}</h4>
-                <p class="text-sm">{{comment.created_at.strftime("%m/%d/%Y, %H:%M:%S")}}</p>
+                <h4 class="text-2xl">
+                  {{comment.posted_by.first_name}}
+                  <span class="text-sm"
+                    >{{comment.created_at.strftime("%m/%d/%Y, %H:%M:%S")}}</span
+                  >
+                </h4>
               </div>
               {% if comment.posted_by.id == session.user_id%}
               <div class="controls">
-                <button>edit</button>
-                <a href="/delete_comment/{{comment.recipe_id}}/{{comment.id}}"><button>delete</button></a>
+                <button class="edit-button-dk">edit</button>
+                <a href="/delete_comment/{{comment.recipe_id}}/{{comment.id}}"
+                  ><button class="edit-button-dk">delete</button></a
+                >
               </div>
               {% endif %}
             </div>
-            <p class="text-lg">
-                {{comment.text}}
-            </p>
+            <p class="text-lg px-4 pt-2">{{comment.text}}</p>
           </div>
           {% endfor %}
         </div>
         <!-- Comment Input -->
-        <form action="/create_comment/{{recipe.id}}", method="POST">
-          <input type="hidden" name="user_id" value='{{session["user_id"]}}'>
-          <input type="hidden" name="recipe_id" value='{{recipe.id}}'>
+        <form
+          action="/create_comment/{{recipe.id}}"
+          ,
+          method="POST"
+          class="mx-4 mb-4"
+        >
+          <input
+            type="hidden"
+            name="user_id"
+            value='{{session["user_id"]}}'
+          />
+          <input
+            type="hidden"
+            name="recipe_id"
+            value="{{recipe.id}}"
+          />
           <div class="comment-input">
             <label for="text">Your comment:</label>
             <textarea
@@ -183,29 +262,35 @@
               rows="10"
               class="border-2 w-full"
             ></textarea>
-            <button class="bg-black text-white">Submit</button>
+            <button
+              class="bg-amber-700 text-amber-50 px-4 py-2 rounded-xl mt-4"
+            >
+              Submit
+            </button>
           </div>
         </form>
       </section>
     </div>
-    <!-- *  This is the modal for submitting updates for NAME -->
+    <!-- * ========== MODALS ========== -->
+    <!-- *  NAME Modal -->
     <div
       id="modal-name"
       class="modal"
     >
       <div class="modal-content">
-        <form action="/edit_title" method="POST">
+        <form
+          action="/edit_title"
+          method="POST"
+        >
           <span
             id="modal-name-close"
             class="close"
-            >&times;</span>
+            >&times;</span
+          >
           {% with messages = get_flashed_messages(category_filter=["title"]) %}
-      {% if messages %}
-      {% for message in messages %}
-      <p>{{message}}</p>
-    {% endfor %}
-    {% endif %}
-    {% endwith %}
+          {% if messages %} {% for message in messages %}
+          <p>{{message}}</p>
+          {% endfor %} {% endif %} {% endwith %}
           <p>Edit Title:</p>
           <input
             type="text"
@@ -229,29 +314,35 @@
         </form>
       </div>
     </div>
-    <!-- *  This is the modal for submitting updates for INGREDIENTS -->
+    <!-- *  INGREDTIENTS Modal -->
     <div
       id="modal-ingredients"
       class="modal"
     >
       <div class="modal-content">
-        <form action="/edit_ingredients" method="POST">
+        <form
+          action="/edit_ingredients"
+          method="POST"
+          class="flex flex-col"
+        >
           <span
             id="modal-ingredients-close"
             class="close"
             >&times;</span
           >
           <p>Edit Ingredients:</p>
-          <input
+          <textarea
             type="text"
             class="border-2"
             minlength="3"
+            rows="5"
+            width="100%"
             name="ingredients"
-            value="{{recipe.ingredients}}"
-          />
+          >
+{{recipe.ingredients}}</textarea
+          >
           <input
             type="hidden"
-            class="border-2"
             name="id"
             value="{{recipe.id}}"
           />
@@ -264,13 +355,16 @@
         </form>
       </div>
     </div>
-    <!-- *  This is the modal for submitting updates for DIRECTIONS -->
+    <!-- *  DIRECTIONS Modal -->
     <div
       id="modal-directions"
       class="modal"
     >
       <div class="modal-content">
-        <form action="/edit_directions" method="POST">
+        <form
+          action="/edit_directions"
+          method="POST"
+        >
           <span
             id="modal-directions-close"
             class="close"
@@ -290,7 +384,7 @@
             name="id"
             value="{{recipe.id}}"
           />
-          
+
           <button
             type="submit"
             class="bg-black text-white"
@@ -300,13 +394,16 @@
         </form>
       </div>
     </div>
-    <!-- *  This is the modal for submitting updates for DESCRIPTION -->
+    <!-- *  DESCRIPTION Modal -->
     <div
       id="modal-description"
       class="modal"
     >
       <div class="modal-content">
-        <form action="/edit_description" method="POST">
+        <form
+          action="/edit_description"
+          method="POST"
+        >
           <span
             id="modal-description-close"
             class="close"
@@ -326,7 +423,7 @@
             name="id"
             value="{{recipe.id}}"
           />
-          
+
           <button
             type="submit"
             class="bg-black text-white"
@@ -340,13 +437,4 @@
     <script src="../static/js/modal.js"></script>
   </body>
   <!-- Modals -->
-  <div
-    id="name-modal"
-    class="fixed z-10 left-0 top-0 w-full h-full overflow-auto bg-black bg-opacity-50 flex justify-center items-center hidden"
-  >
-    <div class="border bg-gray-50 border-gray-500 w-5/6 px-5 py-5 mt-[7%]">
-      <span class="close">&times;</span>
-      <p>Edit Name:</p>
-    </div>
-  </div>
 </html>
