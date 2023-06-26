@@ -232,7 +232,7 @@
               {% endif %}
             </div>
             <p class="text-lg px-4 pt-2">{{comment.text}}</p>
-            <form action="">
+            <form action="/edit_comment/{{recipe.id}}/{{comment.id}}" method="POST">
               <label for="comment-update">Update Comment:</label>
               <textarea
                 name="comment-update"
