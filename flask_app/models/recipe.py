@@ -1,5 +1,4 @@
 from flask import flash
-from flask_sqlalchemy import SQLAlchemy
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app.models.user import User
 from flask_app.models.comment import Comment
