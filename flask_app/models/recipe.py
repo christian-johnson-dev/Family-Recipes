@@ -54,7 +54,8 @@ class Recipe:
         query = """
                 SELECT * FROM recipes
                 LEFT JOIN users ON users.id=recipes.user_id 
-                WHERE title LIKE %(search)s;
+                WHERE title LIKE %(search)s OR
+                title SOUNDS LIKE %(soundslike)s;
                 """
         results=connectToMySQL(cls.db).query_db(query,data)
         recipes = []

@@ -11,7 +11,8 @@ def recipes():
 @app.route('/search_recipes', methods=["POST"])
 def search_recipe():
     data = {
-        'search' : '%'+request.form['search']+'%'
+        'search' : '%'+request.form['search']+'%',
+        'soundslike' : request.form['search']
     }
     recipes = Recipe.search(data)
     return render_template("list.html",recipes=recipes)
