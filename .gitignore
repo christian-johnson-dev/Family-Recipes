@@ -4,6 +4,9 @@
 ### node_modules ###
 node_modules
 
+### Ignore uploads folder ###
+flask_app/static/uploads/
+
 ### Flask ###
 instance/*
 !instance/.gitignore
