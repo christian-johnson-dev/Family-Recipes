@@ -68,6 +68,13 @@ class Comment:
             comment.posted_by=User(user_info)
         return comments
 
+    @classmethod
+    def get_comment_user(cls, comment_id):
+        query = "SELECT * from comments WHERE comments.id = %(comment_id)s;"
+        results = connectToMySQL(cls.db).query_db(query,{"comment_id":comment_id})
+        return cls(results[0])
+
+
     # Do you need to get one comment?
 
     # @classmethod

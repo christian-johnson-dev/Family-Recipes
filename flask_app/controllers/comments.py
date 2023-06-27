@@ -24,6 +24,17 @@ def delete_comment(id,recipe_id):
 
 @app.route("/edit_comment/<recipe_id>/<comment_id>", methods=["POST"])
 def edit_comment(recipe_id, comment_id):
+    current_comment = comment.Comment.get_comment_user(comment_id)
+    if current_comment.user_id != session["user_id"]:
+        print("not logged_in")
+        return redirect(f"/one_recipe/{recipe_id}")
+    print(session)
+    print("CURRENT USER ID:")
+    print("CURRENT USER ID:")
+    print("CURRENT USER ID:")
+    print("CURRENT USER ID:")
+    print("CURRENT USER ID:")
+    print(current_comment.user_id)
     data = {
         'id':comment_id,
         'text':request.form['comment-update']

@@ -64,13 +64,14 @@
             />
             <button class="bg-red-500 text-white">Search</button>
           </div>
-          <a href="/create_recipe"><button class="bg-orange-500 text-white" >Create</button></a>
         </div>
       </form>
+      <a href="/create_recipe"><button class="bg-orange-500 text-white" >Create</button></a>
       
       <table class="w-full overflow-y-auto ">
         <thead class="h-6 bg-amber-700 text-amber-200 border-2 border-amber-700">
           <tr>
+            <th> </th>
             <th class="text-left">Recipe</th>
             <th>Contributor</th>
             <th>Date</th>
@@ -79,33 +80,25 @@
         <tbody class="border-2 border-amber-700 text-amber-700 divide-y-2 divide-amber-700">
           {% for recipe in recipes%}
             <tr class="bg-amber-50 hover:bg-white">
+                <td><img src="{{url_for('static', filename='uploads/'~recipe.img)}}"></td>
                 <td class=""><a href="/one_recipe/{{recipe.id}}">{{recipe.title}}</a></td>
                 <td class="">{{recipe.posted_by.first_name}} {{recipe.posted_by.last_name}}</td>
-                <td>{{recipe.created_at}} {%if recipe.posted_by.id==session.user_id%}
+                <td>{{recipe.created_at.strftime("%B %d %Y")}} {%if recipe.posted_by.id==session.user_id%}
                   <a href="/delete_recipe/{{recipe.id}}">Delete</a>
-                  {% endif %}</td>
-
-                
-                
-            </tr>
+                  {% endif %}</td>    
+              </tr>
           {% endfor %}
-            <tr class="bg-amber-50 hover:bg-white">
-              <td>Butterscotch Pudding</td>
-              <td>Niles Hennry</td>
-              <td> June, 6. 2023</td>
-            </tr>
-            <tr class="bg-amber-50 hover:bg-white">
-              <td>Butterscotch Pudding</td>
-              <td>Niles Hennry</td>
-              <td> June, 6. 2023</td>
-            </tr>
-            <tr class="bg-amber-50 hover:bg-white">
-              <td>Butterscotch Pudding</td>
-              <td>Niles Hennry</td>
-              <td> June, 6. 2023</td>
-            </tr>
         </tbody>
       </table>
+        {%with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class=flashes>
+          {% for message in messages %}
+          <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
     </div>
   </body>
 </html>

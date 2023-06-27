@@ -1,34 +1,31 @@
 List
-    Search bar
-    change date with strftime June 23 2023
-
+    if search results are zero flash No results
 one_recipe
     recipe
-        date submitted June 23 2023
-        img upload
-        change to allow non login user
-        hide edit buttons for one recipe
-        hide comment submit box and submit button
-        click username go to their recipes
-    comments
-        edit button
+        default image if no image
+        img size fit to container
+        toggle comment submit box and submit button
 
-Create  
-    bad request 
+Version 2.0
+Delete record delete associated picture
+Add ingredients table
+Commenting to comments
+Adding separate families
+Data points
+    servings
+Add tags
+    Provided by user
+    gluten-free, desert, ....
+Recipes API
+    get nutritional info
+Ability to pair recipes
+
+Update ingredient quantity given serving size
 
 
 
 
 ## Front end
-    template
-        list.html (list all recipes)
-        create-recipe.html
-            add to form /save_recipe
-
-        recipe.html (display one recipe)
-
-    static
-    css
         
 ## Back end
     controllers
