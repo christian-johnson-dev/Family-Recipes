@@ -55,6 +55,7 @@
         action="/save_recipe"
         method="POST"
         class="flex flex-col gap-6"
+        enctype="multipart/form-data"
       >
         <!--* TITLE INPUT -->
         <div class="input-wrapper">
@@ -64,6 +65,7 @@
             type="text"
             required
             minlength="3"
+            name="title"
             class="text-input"
           />
         </div>
@@ -73,6 +75,7 @@
           <label for="ingredients-input">Ingredients:</label>
           <textarea
             id="ingredients-input"
+            name="ingredients"
             required
             minlength="3"
             class="text-input h-32"
@@ -84,6 +87,7 @@
           <label for="instructions-input">Instructions:</label>
           <textarea
             id="instructions-input"
+            name="directions"
             required
             minlength="3"
             class="text-input h-32"
@@ -95,6 +99,7 @@
           <label for="description-input">Description:</label>
           <textarea
             id="description-input"
+            name="description"
             required
             minlength="3"
             class="text-input h-32"
@@ -113,6 +118,7 @@
             <input
               id="image-input"
               type="file"
+              name="img"
               accept="image/*"
               class="w-0 h-0 opacity-0 cursor-pointer"
             />
