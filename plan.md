@@ -2,6 +2,7 @@ List
 
 one_recipe
     recipe
+        img size fit to container
         change to allow non login user
         hide edit buttons for one recipe
         hide comment submit box and submit button
