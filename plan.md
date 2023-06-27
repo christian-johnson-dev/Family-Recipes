@@ -6,6 +6,21 @@ one_recipe
         img size fit to container
         toggle comment submit box and submit button
 
+Version 2.0
+Delete record delete associated picture
+Add ingredients table
+Commenting to comments
+Adding separate families
+Data points
+    servings
+Add tags
+    Provided by user
+    gluten-free, desert, ....
+Recipes API
+    get nutritional info
+Ability to pair recipes
+
+Update ingredient quantity given serving size
 
 
 
