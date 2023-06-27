@@ -41,6 +41,12 @@ def show_recipe(id):
     
     return render_template("recipe.html",recipe=recipe)
 
+#get all of the recipe of user with user_id = id
+@app.route('/user_recipes/<id>')
+def users_recipes(id):
+    recipes = Recipe.get_users_recipes(id)
+    return render_template("list.html",recipes=recipes) 
+
 # @app.route('/edit/<int:id>')
 # def edit_title(id):
 #     if session.get('logged_in') == True:
