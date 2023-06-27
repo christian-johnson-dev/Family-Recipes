@@ -9,6 +9,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style type="text/tailwindcss">
       @layer components {
+        .login-btn{
+          @apply bg-amber-600 rounded-full mr-4 md:mr-0 px-4 py-2 text-amber-800 hover:bg-amber-200 transition-colors duration-300
+        }
         .modal {
           position: fixed;
           z-index: 1;
@@ -64,9 +67,9 @@
         
 
         {% if session.user_id %}
-        <a href="/logout"><button class="bg-pink-400">Logout</button></a>
+        <a href="/logout"><button class="login-btn">Logout</button></a>
         {% else %}
-        <a href="/login_reg"><button class="bg-pink-400">Login</button></a>
+        <a href="/login_reg"><button class="login-btn">Login</button></a>
         {% endif %}
       </nav>
     </header>
