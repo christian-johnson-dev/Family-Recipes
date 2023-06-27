@@ -30,6 +30,9 @@
         .search-bar {
           @apply flex 
         }
+        .row-image {
+          @apply h-20 w-20 object-cover px-0.5 py-0.5
+        }
       }
     </style>
   </head>
@@ -48,26 +51,22 @@
         {% else %}
         <a href="/login_reg"><button class="login-btn">Login</button></a>
         {% endif %}
-
       </nav>
     </header>
-    <div class="container mx-auto">
-      <form action="/search_recipes" method="POST">
-        <div class="flex justify-between my-5">
-          <div class="search-bar">
-            <label for="searchinput">Search</label>
-            <input
-              name="search"
-              type="text"
-              id="searchinput"
-              class="border-2 border-gray-400"
-            />
-            <button class="bg-red-500 text-white">Search</button>
-          </div>
-        </div>
+    <section class="container mx-auto flex justify-between my-5">
+      <form action="/search_recipes" method="POST"class="flex">
+        <label class="sr-only"for="searchinput">Search</label>
+        <input
+          name="search"
+          type="text"
+          id="searchinput"
+          class="bg-amber-50 rounded-l-xl px-4 py-2 border-2 border-amber-700 hover:bg-white focus:bg-white focus:outline-none focus:border-amber-700 transition-colors duration-300"
+        />
+        <button class="bg-amber-700 text-amber-200 rounded-r-xl border-t-2 border-b-2 border-r-2 border-l-0 px-4 border-amber-700 hover:bg-amber-600 hover:text-amber-100 uppercase leading-loose">Search</button>
       </form>
-      <a href="/create_recipe"><button class="bg-orange-500 text-white" >Create</button></a>
-      
+      <a href="/create_recipe" ><button class="bg-amber-700 text-amber-200 rounded-xl px-4 py-2 uppercase border-2 border-amber-700 hover:bg-amber-600 hover:text-amber-100" >Create</button></a>
+    </section>
+    <div class="container mx-auto">
       <table class="w-full overflow-y-auto ">
         <thead class="h-6 bg-amber-700 text-amber-200 border-2 border-amber-700">
           <tr>
@@ -80,11 +79,11 @@
         <tbody class="border-2 border-amber-700 text-amber-700 divide-y-2 divide-amber-700">
           {% for recipe in recipes%}
             <tr class="bg-amber-50 hover:bg-white">
-                <td><img src="{{url_for('static', filename='uploads/'~recipe.img)}}"></td>
+                <td class="w-20"><a href="/one_recipe/{{recipe.id}}"><img class="row-image" src="{{url_for('static', filename='uploads/'~recipe.img)}}"></a></td>
                 <td class=""><a href="/one_recipe/{{recipe.id}}">{{recipe.title}}</a></td>
                 <td class="">{{recipe.posted_by.first_name}} {{recipe.posted_by.last_name}}</td>
-                <td>{{recipe.created_at.strftime("%B %d %Y")}} {%if recipe.posted_by.id==session.user_id%}
-                  <a href="/delete_recipe/{{recipe.id}}">Delete</a>
+                <td class>{{recipe.created_at.strftime("%B %d %Y")}} {%if recipe.posted_by.id==session.user_id%}
+                  <a class="bg-amber-700 text-amber-50 text-xs"href="/delete_recipe/{{recipe.id}}">Delete</a>
                   {% endif %}</td>    
               </tr>
           {% endfor %}
