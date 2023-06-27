@@ -9,6 +9,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style type="text/tailwindcss">
       @layer components {
+        .login-btn{
+          @apply bg-amber-600 rounded-full mr-4 md:mr-0 px-4 py-2 text-amber-800 hover:bg-amber-200 transition-colors duration-300
+        }
         .modal {
           position: fixed;
           z-index: 1;
@@ -64,9 +67,9 @@
         
 
         {% if session.user_id %}
-        <a href="/logout"><button class="bg-pink-400">Logout</button></a>
+        <a href="/logout"><button class="login-btn">Logout</button></a>
         {% else %}
-        <a href="/login_reg"><button class="bg-pink-400">Login</button></a>
+        <a href="/login_reg"><button class="login-btn">Login</button></a>
         {% endif %}
       </nav>
     </header>
@@ -84,7 +87,7 @@
             {{recipe.posted_by.last_name}}
           </span>
         </a>
-          on {{recipe.created_at}}
+          on {{recipe.created_at.strftime("%B %d %Y")}}
         </p>
       </div>
 
@@ -149,8 +152,7 @@
           class="w-full md:w-1/2 md:ml-4 overflow-hidden aspect-square rounded-xl"
         >
           <img
-            class=""
-            src="https://images.unsplash.com/photo-1625876981820-be17a6807189?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80"
+            src="{{url_for('static', filename='uploads/'~recipe.img)}}"
             alt="cookies"
           />
         </div>

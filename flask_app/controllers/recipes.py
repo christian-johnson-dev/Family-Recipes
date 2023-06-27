@@ -1,6 +1,16 @@
 from flask_app import app
-from flask import render_template, session, redirect,request
+from flask import render_template, session, redirect,request,send_from_directory,url_for
 from flask_app.models.recipe import Recipe
+from werkzeug.utils import secure_filename
+import os
+
+
+
+ALLOWED_EXTENSIONS={'png','jpg','jpeg'}
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 
@@ -29,15 +39,39 @@ def create_recipe():
         return redirect("/logout")
     if not Recipe.validate_recipe(request.form):
         return redirect("/create_recipe")
-    Recipe.save(request.form)
+    
+    filename="" #default 
+    
+    img = request.files['img']
+        # if user does not select file, browser also
+        # submit an empty part without filename
+    if img and img.filename!='':
+        if allowed_file(img.filename): 
+       
+            filename = secure_filename(img.filename)
+            img.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            
+
+    new_recipe={
+        'title':request.form['title'],
+        'ingredients':request.form['ingredients'],
+        'img':filename,
+        'description':request.form['description'],
+        'directions':request.form['directions'],
+        'user_id':request.form['user_id']
+        }
+            
+    Recipe.save(new_recipe)
     return redirect("/list")
+
 
 @app.route('/one_recipe/<int:id>')
 def show_recipe(id):
-    # if session.get('logged_in') != True:
-    #     return redirect("/login_reg")
+    
     session['recipe_id']=id
     recipe = Recipe.get_one_recipe(id)
+    print(recipe.img)
+    
     
     return render_template("recipe.html",recipe=recipe)
 

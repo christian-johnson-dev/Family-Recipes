@@ -1,11 +1,7 @@
 List
-    Search bar
-    change date with strftime June 23 2023
 
 one_recipe
     recipe
-        date submitted June 23 2023
-        img upload
         change to allow non login user
         hide edit buttons for one recipe
         hide comment submit box and submit button
@@ -14,7 +10,6 @@ one_recipe
         edit button
 
 Create  
-    bad request 
 
 
 
