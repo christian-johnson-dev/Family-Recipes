@@ -54,9 +54,36 @@ class Recipe:
         query = """
                 SELECT * FROM recipes
                 LEFT JOIN users ON users.id=recipes.user_id 
-                WHERE title LIKE %(search)s;
+                WHERE title LIKE %(search)s OR
+                title SOUNDS LIKE %(soundslike)s;
                 """
         results=connectToMySQL(cls.db).query_db(query,data)
+        recipes = []
+        
+        for result in results:
+            recipe = cls(result)
+            recipes.append( recipe )
+            user_info = {
+                'id' : result['users.id'],
+                'first_name':result['first_name'],
+                'last_name':result['last_name'],
+                'email':result['email'],
+                'password':result['password'],
+                'created_at':result['users.created_at'],
+                'updated_at':result['users.updated_at']
+            }
+            recipe.posted_by=User(user_info)
+        return recipes
+
+    @classmethod
+    def get_users_recipes(cls, id):
+        
+        query = """
+                SELECT * FROM recipes
+                LEFT JOIN users ON users.id=recipes.user_id
+                WHERE user_id = %(id)s;
+                """
+        results=connectToMySQL(cls.db).query_db(query,{'id':id})
         recipes = []
         
         for result in results:

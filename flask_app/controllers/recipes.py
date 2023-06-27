@@ -11,7 +11,8 @@ def recipes():
 @app.route('/search_recipes', methods=["POST"])
 def search_recipe():
     data = {
-        'search' : '%'+request.form['search']+'%'
+        'search' : '%'+request.form['search']+'%',
+        'soundslike' : request.form['search']
     }
     recipes = Recipe.search(data)
     return render_template("list.html",recipes=recipes)
@@ -39,6 +40,12 @@ def show_recipe(id):
     recipe = Recipe.get_one_recipe(id)
     
     return render_template("recipe.html",recipe=recipe)
+
+#get all of the recipe of user with user_id = id
+@app.route('/user_recipes/<id>')
+def users_recipes(id):
+    recipes = Recipe.get_users_recipes(id)
+    return render_template("list.html",recipes=recipes) 
 
 # @app.route('/edit/<int:id>')
 # def edit_title(id):
