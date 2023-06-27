@@ -1,30 +1,16 @@
 List
-
+    if search results are zero flash No results
 one_recipe
     recipe
+        default image if no image
         img size fit to container
-        change to allow non login user
-        hide edit buttons for one recipe
-        hide comment submit box and submit button
-        click username go to their recipes
-    comments
-        edit button
+        toggle comment submit box and submit button
 
-Create  
 
 
 
 
 ## Front end
-    template
-        list.html (list all recipes)
-        create-recipe.html
-            add to form /save_recipe
-
-        recipe.html (display one recipe)
-
-    static
-    css
         
 ## Back end
     controllers

@@ -1,5 +1,5 @@
 from flask_app import app
-from flask import render_template, session, redirect,request,send_from_directory,url_for
+from flask import render_template, session, flash, redirect,request,send_from_directory,url_for
 from flask_app.models.recipe import Recipe
 from werkzeug.utils import secure_filename
 import os
@@ -25,6 +25,9 @@ def search_recipe():
         'soundslike' : request.form['search']
     }
     recipes = Recipe.search(data)
+    print(recipes)
+    if(recipes==[]):
+        flash('No results found')
     return render_template("list.html",recipes=recipes)
 
 @app.route("/create_recipe")
