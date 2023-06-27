@@ -78,10 +78,12 @@
         <p class="hidden md:flex text-sm">
           <!-- TODO can we make this name clickable back to List with a display of all their recipies? -->
           By:
-          <span class="edit-button-dk"
-            >{{recipe.posted_by.first_name}}
-            {{recipe.posted_by.last_name}}</span
-          >
+          <a href="/user_recipes/{{recipe.user_id}}">
+          <span class="edit-button-dk">
+            {{recipe.posted_by.first_name}}
+            {{recipe.posted_by.last_name}}
+          </span>
+        </a>
           on {{recipe.created_at}}
         </p>
       </div>
@@ -102,11 +104,11 @@
         </div>
         <div class="flex justify-end text-sm text-amber-700">
           By:
-          <span class="edit-button-dk"
-            >{{recipe.posted_by.first_name}}
-            {{recipe.posted_by.last_name}}</span
-          >
-          on {{recipe.created_at}}
+            <span class="edit-button-dk">
+              {{recipe.posted_by.first_name}}
+              {{recipe.posted_by.last_name}}
+            </span>
+            on {{recipe.created_at}}
         </div>
       </div>
       <section class="top-section flex flex-col-reverse md:flex-row">
@@ -231,7 +233,7 @@
               {% endif %}
             </div>
             <p class="text-lg px-4 pt-2">{{comment.text}}</p>
-            <form action="">
+            <form action="/edit_comment/{{recipe.id}}/{{comment.id}}" method="POST">
               <label for="comment-update">Update Comment:</label>
               <textarea
                 name="comment-update"

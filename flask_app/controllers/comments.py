@@ -22,7 +22,11 @@ def delete_comment(id,recipe_id):
     comment.Comment.delete(id)
     return redirect(f"/one_recipe/{recipe_id}")
 
-@app.route("/edit_comment/<id>")
-def edit_comment(id):
-    comment.Comment.change(id)
-    return redirect(f"")
+@app.route("/edit_comment/<recipe_id>/<comment_id>", methods=["POST"])
+def edit_comment(recipe_id, comment_id):
+    data = {
+        'id':comment_id,
+        'text':request.form['comment-update']
+    }
+    comment.Comment.change(data)
+    return redirect(f"/one_recipe/{recipe_id}")
