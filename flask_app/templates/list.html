@@ -83,11 +83,8 @@
                 <td class="">{{recipe.posted_by.first_name}} {{recipe.posted_by.last_name}}</td>
                 <td>{{recipe.created_at.strftime("%B %d %Y")}} {%if recipe.posted_by.id==session.user_id%}
                   <a href="/delete_recipe/{{recipe.id}}">Delete</a>
-                  {% endif %}</td>
-
-                
-                
-            </tr>
+                  {% endif %}</td>    
+              </tr>
           {% endfor %}
         </tbody>
       </table>
