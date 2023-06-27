@@ -24,10 +24,9 @@ class Comment:
     # Edit a comment given data from request form
     @classmethod
     def change(cls,data):
-        query="""UPDATE recipes SET title=%(title)s, ingredients=%(ingredients)s,img=%(img)s,
-                description=%(description)s,user_id=%(user_id)s
+        query="""UPDATE comments SET text=%(text)s
                 WHERE id=%(id)s;"""
-        result=connectToMySQL(cls.db).query_db(query,data)
+        result=connectToMySQL(cls.db).query_db(query, data)
         return result
 
     # Given a comment id this will delete comment
