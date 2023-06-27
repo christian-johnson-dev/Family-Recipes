@@ -81,7 +81,7 @@
             <tr class="bg-amber-50 hover:bg-white">
                 <td class=""><a href="/one_recipe/{{recipe.id}}">{{recipe.title}}</a></td>
                 <td class="">{{recipe.posted_by.first_name}} {{recipe.posted_by.last_name}}</td>
-                <td>{{recipe.created_at}} {%if recipe.posted_by.id==session.user_id%}
+                <td>{{recipe.created_at.strftime("%B %d %Y")}} {%if recipe.posted_by.id==session.user_id%}
                   <a href="/delete_recipe/{{recipe.id}}">Delete</a>
                   {% endif %}</td>
 
@@ -89,21 +89,6 @@
                 
             </tr>
           {% endfor %}
-            <tr class="bg-amber-50 hover:bg-white">
-              <td>Butterscotch Pudding</td>
-              <td>Niles Hennry</td>
-              <td> June, 6. 2023</td>
-            </tr>
-            <tr class="bg-amber-50 hover:bg-white">
-              <td>Butterscotch Pudding</td>
-              <td>Niles Hennry</td>
-              <td> June, 6. 2023</td>
-            </tr>
-            <tr class="bg-amber-50 hover:bg-white">
-              <td>Butterscotch Pudding</td>
-              <td>Niles Hennry</td>
-              <td> June, 6. 2023</td>
-            </tr>
         </tbody>
       </table>
     </div>
