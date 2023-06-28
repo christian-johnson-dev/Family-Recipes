@@ -54,16 +54,20 @@
       </nav>
     </header>
     <section class="container mx-auto flex justify-between my-5">
-      <form action="/search_recipes" method="POST"class="flex">
-        <label class="sr-only"for="searchinput">Search</label>
-        <input
-          name="search"
-          type="text"
-          id="searchinput"
-          class="bg-amber-50 rounded-l-xl px-4 py-2 border-2 border-amber-700 hover:bg-white focus:bg-white focus:outline-none focus:border-amber-700 transition-colors duration-300"
-        />
-        <button class="bg-amber-700 text-amber-200 rounded-r-xl border-t-2 border-b-2 border-r-2 border-l-0 px-4 border-amber-700 hover:bg-amber-600 hover:text-amber-100 uppercase leading-loose">Search</button>
-      </form>
+      <div class="flex gap-4">
+        <form action="/search_recipes" method="POST"class="flex">
+          <label class="sr-only"for="searchinput">Search</label>
+          <input
+            name="search"
+            type="text"
+            id="searchinput"
+            class="bg-amber-50 rounded-l-xl px-4 py-2 border-2 w-auto border-amber-700 hover:bg-white focus:bg-white focus:outline-none focus:border-amber-700 transition-colors duration-300"
+          />
+          <button class="bg-amber-700 text-amber-200 rounded-r-xl border-t-2 border-b-2 border-r-2 border-l-0 px-4 border-amber-700 hover:bg-amber-600 hover:text-amber-100 uppercase leading-loose">Search</button>
+        </form>
+        <a href="/" class=" text-amber-700 px-4 py-2  uppercase flex items-center">Show All</a>
+      </div>
+
       <a href="/create_recipe" ><button class="bg-amber-700 text-amber-200 rounded-xl px-4 py-2 uppercase border-2 border-amber-700 hover:bg-amber-600 hover:text-amber-100" >Create</button></a>
     </section>
     <div class="container mx-auto">
@@ -72,8 +76,8 @@
           <tr>
             <th> </th>
             <th class="text-left">Recipe</th>
-            <th>Contributor</th>
-            <th>Date</th>
+            <th class="text-left">Contributor</th>
+            <th class="text-left">Date</th>
           </tr>
         </thead>
         <tbody class="border-2 border-amber-700 text-amber-700 divide-y-2 divide-amber-700">
@@ -88,8 +92,8 @@
               {%endif%}
                 <td class=""><a href="/one_recipe/{{recipe.id}}">{{recipe.title}}</a></td>
                 <td class="">{{recipe.posted_by.first_name}} {{recipe.posted_by.last_name}}</td>
-                <td class>{{recipe.created_at.strftime("%B %d %Y")}} {%if recipe.posted_by.id==session.user_id%}
-                  <a class="bg-amber-700 text-amber-50 text-xs"href="/delete_recipe/{{recipe.id}}">Delete</a>
+                <td class="flex justify-between items-center"><span class="mt-6">{{recipe.created_at.strftime("%B %d %Y")}}</span>{%if recipe.posted_by.id==session.user_id%}
+                  <a class="bg-amber-700 text-amber-50 text-xs mt-6 mr-4 px-4 py-2 rounded-lg"href="/delete_recipe/{{recipe.id}}">Delete</a>
                   {% endif %}</td>    
               </tr>
           {% endfor %}
