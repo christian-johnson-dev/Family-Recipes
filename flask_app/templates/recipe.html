@@ -163,12 +163,12 @@
         <div
           class="w-full md:w-1/2 md:ml-4 overflow-hidden aspect-square rounded-xl"
         >
-        {%if recipe.img == 'img'%}
+        {%if recipe.img == ''%}
         No photo provided
         {%else%}
         <img
           src="{{url_for('static', filename='uploads/'~recipe.img)}}"
-          alt="cookies"
+          alt="Image of {{recipe.title}}"
         />
         {%endif%}
         </div>

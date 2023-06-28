@@ -19,6 +19,7 @@ Add tags
 Recipes API
     get nutritional info
 Ability to pair recipes
+Prevent accidental creation of data
 
 Update ingredient quantity given serving size
 

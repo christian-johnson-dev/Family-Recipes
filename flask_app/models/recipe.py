@@ -181,6 +181,10 @@ class Recipe:
         recipe = cls(recipe)        
         recipe.posted_by=User(user_info)
         recipe.comments = Comment.get_recipes_comments(id)
+        print()
+        print("Recipe:" + recipe.img)
+        print()
+
         return recipe
 
     @classmethod
