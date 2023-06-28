@@ -48,7 +48,7 @@ class Comment:
                 SELECT * FROM comments
                 JOIN users on comments.user_id=users.id
                 WHERE comments.recipe_id = %(id)s
-                ORDER BY comments.created_at DESC;
+                ORDER BY comments.created_at ASC;
                 """
 
         results = connectToMySQL(cls.db).query_db(query,{"id":id})
