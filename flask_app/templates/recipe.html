@@ -8,10 +8,22 @@
     />
     <script src="https://cdn.tailwindcss.com"></script>
     <style type="text/tailwindcss">
+      @layer helpers {
+        .spacepreserver {
+          white-space: pre-line;
+        }
+        .first-cap::first-letter {
+          text-transform: capitalize;
+          font-size: 2rem;
+          font-weight: bold;
+        }
+      }
       @layer components {
         .login-btn{
           @apply bg-amber-600 rounded-full mr-4 md:mr-0 px-4 py-2 text-amber-800 hover:bg-amber-200 transition-colors duration-300
         }
+        /* ===== MODAL ===== */
+        /* The modal background overlay */
         .modal {
           position: fixed;
           z-index: 1;
@@ -24,27 +36,44 @@
           background-color: rgba(0, 0, 0, 0.4);
           display: none;
         }
+        /* The modal */
         .modal-content {
-          background-color: #fefefe;
+          @apply bg-amber-50 text-amber-700 border-2 border-amber-700 rounded-xl shadow-md;
           margin: 15% auto;
           padding: 20px;
-          border: 1px solid #888;
           width: 80%;
         }
+        /* Modal input fields */
+        .input-field {
+          @apply border-2 border-amber-700 p-2 rounded-md;
+        }
+        /* Modal Submit button */
+        .modal-submit-btn {
+          @apply bg-amber-600 border-amber-800 shadow-lg border-2 text-amber-100 p-2 rounded-md tracking-widest mt-3 w-[50%] mx-auto;
+        }
+
+        .comment-update-form {
+          @apply  mx-4 mt-4
+        }
+        .comment-update-form textarea {
+          @apply border border-amber-700 p-2 rounded-md;
+        }
+
         .section-banner-btwn {
           @apply bg-amber-700 flex justify-between items-center px-4 py-2;
         }
 
-        .edit-button-lt {
+        .edit-light {
           @apply bg-amber-600 text-amber-700 px-2  text-sm h-5 rounded-full hover:bg-amber-200 transition-colors duration-300;
         }
-        .edit-button-dk {
+        .edit-dark {
           @apply bg-amber-700 text-amber-200 px-2  text-sm h-5 rounded-full hover:bg-amber-600 transition-colors duration-300;
         }
-
-        .overflow-columns {
-          column-fill: auto;
+        .section-text {
+          @apply text-amber-700 columns-1 md:columns-2 mx-4 ;
         }
+      
+        
       }
     </style>
 
@@ -78,15 +107,14 @@
       <!-- * Link back to list & Display recipe author &  -->
       <div class="flex justify-between items-center text-amber-700 py-2">
         <a href="/list">&lt;&lt; Back to recipes list</a>
-        <p class="hidden md:flex text-sm">
-          <!-- TODO can we make this name clickable back to List with a display of all their recipies? -->
-          By:
+        <p class="flex text-sm">
+          By: 
           <a href="/user_recipes/{{recipe.user_id}}">
-          <span class="edit-button-dk">
+          <span class="edit-dark mx-1">
             {{recipe.posted_by.first_name}}
             {{recipe.posted_by.last_name}}
           </span>
-        </a>
+          </a>
           on {{recipe.created_at.strftime("%B %d %Y")}}
         </p>
       </div>
@@ -96,33 +124,17 @@
       <div class="flex flex-col md:hidden">
         <div class="flex justify-between">
           <h2 class="text-4xl text-amber-700">{{recipe.title}}</h2>
-          {%if recipe.posted_by.id==session.user_id%}
-          <button
-            id="modal-name-btn"
-            class="edit-button-dk mt-2 mr-2"
-          >
-            edit
-          </button>
-          {% endif %}
-        </div>
-        <div class="flex justify-end text-sm text-amber-700">
-          By:
-            <span class="edit-button-dk">
-              {{recipe.posted_by.first_name}}
-              {{recipe.posted_by.last_name}}
-            </span>
-            on {{recipe.created_at}}
         </div>
       </div>
       <section class="top-section flex flex-col-reverse md:flex-row">
         <div class="w-full md:w-1/2">
-          <!-- * Name & edit button  hidden on mobile, displayed when >= tablet-->
+          <!-- * Name & edit button hidden on mobile, displayed when >= tablet-->
           <div class="hidden md:flex justify-between">
             <h2 class="text-4xl text-amber-700">{{recipe.title}}</h2>
             {%if recipe.posted_by.id==session.user_id%}
             <button
               id="modal-name-btn"
-              class="edit-button-dk mt-2 mr-2"
+              class="edit-dark mt-2 mr-2"
             >
               edit
             </button>
@@ -136,13 +148,13 @@
               {%if recipe.posted_by.id==session.user_id%}
               <button
                 id="modal-ingredient-btn"
-                class="edit-button-lt"
+                class="edit-light"
               >
                 edit
               </button>
               {% endif %}
             </div>
-            <p class="text-amber-700 px-2 md:columns-2 overflow-auto">
+            <p class="text-amber-700 spacepreserver">
               {{recipe.ingredients}}
             </p>
           </div>
@@ -166,15 +178,15 @@
           {%if recipe.posted_by.id==session.user_id%}
           <button
             id="modal-description-btn"
-            class="edit-button-lt absolute right-4"
+            class="edit-light absolute right-4"
           >
             edit
           </button>
           {% endif %}
         </header>
         <div class="content-wrapper flex justify-center">
-          <div class="columns-1 md:columns-2 max-h-min">
-            {{recipe.description}}
+          <div class="section-text">
+            <p class="spacepreserver first-cap">{{recipe.description}}</p>
           </div>
         </div>
       </section>
@@ -187,15 +199,15 @@
           {%if recipe.posted_by.id==session.user_id%}
           <button
             id="modal-instructions-btn"
-            class="edit-button-lt absolute right-4"
+            class="edit-light absolute right-4"
           >
             edit
           </button>
           {% endif %}
         </header>
         <div class="content-wrapper flex justify-center">
-          <div class="columns-2 mx-4 mt-4">
-            <p>{{recipe.directions}}</p>
+          <div class="section-text">
+            <p class="spacepreserver first-cap">{{recipe.directions}}</p>
           </div>
         </div>
       </section>
@@ -207,9 +219,9 @@
           </h3>
         </header>
       </section>
-
+      <!-- Previous Comments -->
       <section>
-        <!-- Previous Comments -->
+        
         <div class="mx-4">
           {% for comment in recipe.comments%}
           <div
@@ -228,36 +240,37 @@
               </div>
               {% if comment.posted_by.id == session.user_id%}
               <div class="controls">
-                <button class="edit-button-dk">edit</button>
+                <button class="edit-dark edit-button" data-comment-id="{{comment.id}}">edit</button>
                 <a href="/delete_comment/{{comment.recipe_id}}/{{comment.id}}"
-                  ><button class="edit-button-dk">delete</button></a
+                  ><button class="edit-dark">delete</button></a
                 >
               </div>
               {% endif %}
             </div>
             <p class="text-lg px-4 pt-2">{{comment.text}}</p>
             {% if comment.posted_by.id == session.user_id%}
-            <form action="/edit_comment/{{recipe.id}}/{{comment.id}}" method="POST">
+            <form class="comment-update-form hidden" data-comment-id="{{comment.id}}" action="/edit_comment/{{recipe.id}}/{{comment.id}}" method="POST">
               <label for="comment-update">Update Comment:</label>
               <textarea
                 name="comment-update"
                 id="comment-update"
                 cols="30"
-                rows="10"
+                rows="5"
                 class="border-2 w-full"
-              ></textarea>
-              <button
+              >{{comment.text}}</textarea>
+              <button type="submit"
                 class="bg-amber-700 text-amber-50 px-4 py-2 rounded-xl mt-4"
               >
                 Submit
               </button>
+              <button type="button" class="cancel-button bg-amber-700 text-amber-50 px-4 py-2 rounded-xl mt-4" data-comment-id="{{comment.id}}">Cancel</button>
             </form>
             {% endif %}
           </div>
           {% endfor %}
         </div>
+                <!-- ** Comment Input ** -->
         {% if session.user_id %}
-        <!-- Comment Input -->
         <form
           action="/create_comment/{{recipe.id}}"
           ,
@@ -358,10 +371,10 @@
             class="border-2"
             minlength="3"
             rows="5"
-            width="100%"
+            width="40cols"
             name="ingredients"
           >
-{{recipe.ingredients}}</textarea
+          {{recipe.ingredients}}</textarea
           >
           <input
             type="hidden"
@@ -370,7 +383,7 @@
           />
           <button
             type="submit"
-            class="bg-black text-white"
+            class="bg-amber-700 text-amber-50 px-4 py-2 rounded-xl mt-4"
           >
             Update Ingredients
           </button>
@@ -386,6 +399,7 @@
         <form
           action="/edit_directions"
           method="POST"
+          class="flex flex-col"
         >
           <span
             id="modal-directions-close"
@@ -393,13 +407,21 @@
             >&times;</span
           >
           <p>Edit Directions:</p>
-          <input
+          <textarea
+            type="text"
+            class="input-field"
+            minlength="3"
+            rows="5"
+            width="40cols"
+            name="directions"
+          >{{recipe.directions}}</textarea>
+          <!-- <input
             type="text"
             class="border-2"
             minlength="3"
             name="directions"
             value="{{recipe.directions}}"
-          />
+          /> -->
           <input
             type="hidden"
             class="border-2"
@@ -409,7 +431,7 @@
 
           <button
             type="submit"
-            class="bg-black text-white"
+            class="modal-submit-btn"
           >
             Update Directions
           </button>
@@ -425,6 +447,7 @@
         <form
           action="/edit_description"
           method="POST"
+          class="flex flex-col"
         >
           <span
             id="modal-description-close"
@@ -432,13 +455,12 @@
             >&times;</span
           >
           <p>Edit Description:</p>
-          <input
-            type="text"
-            class="border-2"
+          <textarea 
+          type="text"
+          class="input-field"
             minlength="3"
             name="description"
-            value="{{recipe.description}}"
-          />
+            >{{recipe.description}}</textarea>
           <input
             type="hidden"
             class="border-2"
@@ -448,7 +470,7 @@
 
           <button
             type="submit"
-            class="bg-black text-white"
+            class="modal-submit-btn"
           >
             Update Description
           </button>
@@ -457,6 +479,7 @@
     </div>
     <!-- * This is the external js file that handles the opening and closing of the modals. -->
     <script src="../static/js/modal.js"></script>
+    <script src="../static/js/editComment.js"></script>
   </body>
   <!-- Modals -->
 </html>
