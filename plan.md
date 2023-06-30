@@ -1,11 +1,3 @@
-List
-    if search results are zero flash No results
-one_recipe
-    recipe
-        default image if no image
-        img size fit to container
-        toggle comment submit box and submit button
-
 Version 2.0
 Delete record delete associated picture
 Add ingredients table
